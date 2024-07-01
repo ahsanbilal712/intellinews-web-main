@@ -11,6 +11,8 @@
   "dependencies": {
     "@emailjs/browser": "^3.7.0",
     "bootstrap": "^5.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "gray-matter": "^4.0.3",
     "luxon": "^3.0.3",
     "mongoose": "^8.4.4",
@@ -28,5 +30,13 @@
   "devDependencies": {
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
