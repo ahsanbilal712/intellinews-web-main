@@ -20,14 +20,14 @@ const category = categories.reduce((prev, curr) => {
 }, {})
 
 var cateList = Object.keys(category).map(cateTitle => {
-	const imgGet =  categories.filter(post => post.name === cateTitle);
-	
-	return {
-		name: cateTitle, 
-		slug: slugify(cateTitle),
-		count: category[cateTitle],
-		cateImg: imgGet[0].thumb
-	}; 
+    const imgGet = categories.filter(post => post.name === cateTitle);
+
+    return {
+        name: cateTitle, 
+        slug: slugify(cateTitle),
+        count: category[cateTitle],
+        cateImg: imgGet.length > 0 ? imgGet[0].thumb : '/public/images/white-logo.svg' // Provide a default image path if not found
+    }; 
 });
 
 const slideSettings = {
