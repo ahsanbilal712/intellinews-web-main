@@ -54,56 +54,82 @@
 //
 
 
-import { getAllPosts } from "../../lib/api";
-import HeadMeta from "../components/elements/HeadMeta";
-import FooterOne from "../components/footer/FooterOne";
-import HeaderTwo from "../components/header/HeaderTwo";
-import PostSectionFive from "../components/post/PostSectionFive";
-import PostSectionSeven from "../components/post/PostSectionSeven";
-import PostSectionSix from "../components/post/PostSectionSix";
-import PostSectionThree from "../components/post/PostSectionThree";
-import SliderOne from "../components/slider/SliderOne";
+// import { getAllPosts } from "../../lib/api";
+// import HeadMeta from "../components/elements/HeadMeta";
+// import FooterOne from "../components/footer/FooterOne";
+// import HeaderTwo from "../components/header/HeaderTwo";
+// import PostSectionFive from "../components/post/PostSectionFive";
+// import PostSectionSeven from "../components/post/PostSectionSeven";
+// import PostSectionSix from "../components/post/PostSectionSix";
+// import PostSectionThree from "../components/post/PostSectionThree";
+// import SliderOne from "../components/slider/SliderOne";
 
-const HomeTwo = ({allPosts}) => {
+// const HomeTwo = ({allPosts}) => {
+
+//   return (
+//       <>
+//         <HeadMeta metaTitle="Home"/>
+//         <HeaderTwo />
+//         <SliderOne slidePost={allPosts} />
+//         <PostSectionThree postData={allPosts} />
+//         {/*<PostSectionSeven postData={allPosts} />*/}
+//         <PostSectionFive postData={allPosts} />
+//         {/*<PostSectionSix postData={allPosts} />*/}
+//         <FooterOne />
+//       </>
+//   );
+// }
+
+// export default HomeTwo;
+
+
+// export async function getStaticProps() {
+//   const allPosts = getAllPosts([
+//     'slug',
+//     'postFormat',
+//     'story',
+//     'trending',
+//     'title',
+//     'excerpt',
+//     'featureImg',
+//     'cate',
+//     'cate_bg',
+//     'cate_img',
+//     'author_name',
+//     'author_img',
+//     'date',
+//     'post_views',
+//     'post_share',
+//   ])
+
+//   return {
+//     props: { allPosts }
+//   }
+// }
+
+import useSWR from 'swr';
+
+const fetcher = url => fetch(url).then(res => res.json());
+
+function HomePage() {
+  const { data, error } = useSWR('/api/news', fetcher);
+
+  if (error) return <div>Failed to load data.</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
-      <>
-        <HeadMeta metaTitle="Home"/>
-        <HeaderTwo />
-        <SliderOne slidePost={allPosts} />
-        <PostSectionThree postData={allPosts} />
-        {/*<PostSectionSeven postData={allPosts} />*/}
-        <PostSectionFive postData={allPosts} />
-        {/*<PostSectionSix postData={allPosts} />*/}
-        <FooterOne />
-      </>
+    <div>
+      <h1>Latest News Summaries</h1>
+      <ul>
+        {data.map(news => (
+          <li key={news._id}>
+            <h2>{news.Headline}</h2>
+            <p>{news.Summary}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-export default HomeTwo;
-
-
-export async function getStaticProps() {
-  const allPosts = getAllPosts([
-    'slug',
-    'postFormat',
-    'story',
-    'trending',
-    'title',
-    'excerpt',
-    'featureImg',
-    'cate',
-    'cate_bg',
-    'cate_img',
-    'author_name',
-    'author_img',
-    'date',
-    'post_views',
-    'post_share',
-  ])
-
-  return {
-    props: { allPosts }
-  }
-}
-
+export default HomePage;
