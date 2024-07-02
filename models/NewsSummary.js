@@ -3,7 +3,12 @@ import mongoose from 'mongoose';
 const newsSummarySchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   Headline: String,
-  Summary: String
+  Category: String,  // Add Category field
+  Summary: String,
+  sources: [{        // Define an array of sources with name and URL
+    SourceName: String,
+    SourceUrl: String
+  }]
 }, { collection: 'news_summaries' });
 
 const NewsSummary = mongoose.models.NewsSummary || mongoose.model('NewsSummary', newsSummarySchema);

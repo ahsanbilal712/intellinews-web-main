@@ -14,7 +14,16 @@ const NewsPage = ({ news }) => {
       <HeaderTwo />
       <div>
         <h1>{news.Headline}</h1>
+        <h3>Category: {news.Category}</h3>
         <p>{news.Summary}</p>
+        <div>
+          {news.sources && news.sources.map((source, index) => (
+            <div key={index}>
+              <h2>{source.SourceName}</h2>
+              <h3><a href={source.SourceUrl} target="_blank" rel="noopener noreferrer">Link to Source</a></h3>
+            </div>
+          ))}
+        </div>
       </div>
       <FooterOne />
     </>
@@ -26,7 +35,6 @@ export async function getServerSideProps(context) {
   const client = await MongoClient.connect(process.env.MONGODB_URI);
   const db = client.db('db');
 
-  // Use the 'new' keyword with ObjectId
   const news = await db.collection('news_summaries').findOne({_id: new ObjectId(id)});
 
   client.close();
