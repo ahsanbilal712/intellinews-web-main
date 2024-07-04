@@ -1,0 +1,17 @@
+<nav className="navbar bg-grey-dark-one navbar__style-four">
+    <div className="container">
+      <div className="navbar-inner justify-content-between">
+        <div className="main-nav-wrapper">
+          <ul className="main-navigation list-inline">
+            {categories.map((category, index) => (
+              <li key={index} className="has-dropdown">
+                <Link href={`/categories/${category}`}>
+                  <a>{category}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
