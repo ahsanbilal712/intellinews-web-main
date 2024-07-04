@@ -7,7 +7,7 @@ const NewsPage = ({ news }) => {
   if (!news) {
     return <div>No news found.</div>;
   }
-
+     
   return (
     <>
       <HeadMeta metaTitle={news.Headline}/>
@@ -32,11 +32,18 @@ const NewsPage = ({ news }) => {
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
+  if (!ObjectId.isValid(id)) {
+    return {
+      props: {
+        news: null
+      }
+    };
+  }
+  
   const client = await MongoClient.connect(process.env.MONGODB_URI);
   const db = client.db('db');
 
   const news = await db.collection('news_summaries').findOne({_id: new ObjectId(id)});
-
   client.close();
 
   return {
