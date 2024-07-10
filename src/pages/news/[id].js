@@ -11,7 +11,6 @@ const NewsPage = ({ news }) => {
       <div className="bg-red-400">
         <HeadMeta metaTitle={news ? news.Headline : "News Not Found"} />
         <HeaderTwo />
-
         <NewsLayout news={news} />
         <FooterOne />
       </div>
