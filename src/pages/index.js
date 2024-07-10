@@ -2,6 +2,7 @@ import Link from 'next/link';
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterOne from "../components/footer/FooterOne";
 import HeaderTwo from "../components/header/HeaderTwo";
+import HomeNews from "../components/news/HomeNews"
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -26,27 +27,12 @@ function HomeTwo() {
 
   return (
     <>
+      <>
       <HeadMeta metaTitle="Home"/>
       <HeaderTwo />
-      <select onChange={handleCategoryChange} value={category}>
-        <option value="">All Categories</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Pakistan">Pakistan</option>
-        <option value="Sports">Sports</option>
-        {/* Add more categories as needed */}
-      </select>
-      <div>
-        <ul>
-          {data.map(news => (
-            <li key={news._id}>
-              <Link href={`/news/${news._id}`}>
-                <a><h2>{news.Headline}</h2></a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <HomeNews news={data} category={category} setCategory={setCategory} />
       <FooterOne />
+    </>
     </>
   );
 }
