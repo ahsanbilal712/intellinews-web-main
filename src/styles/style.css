@@ -57,6 +57,10 @@ Date Created: Oct 14, 2022
 
 ================================================== --*/
 /*--imported fonts--*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'Poppins';
   font-style: italic;
@@ -8415,7 +8419,7 @@ address .tel i {
   color: #fff;
 }
 /*--Media queries--*/
-@media screen and (min-width: 0 \0) {
+@media screen and (min-width: 0) {
   .axil-latest-post .post-block {
     display: block;
   }
