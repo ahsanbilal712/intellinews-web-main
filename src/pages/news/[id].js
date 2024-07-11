@@ -8,7 +8,7 @@ import NewsLayout from "../../components/post/layout/NewsLayout";
 const NewsPage = ({ news }) => {
   return (
     <>
-      <div className="bg-red-400">
+      <div className="">
         <HeadMeta metaTitle={news ? news.Headline : "News Not Found"} />
         <HeaderTwo />
         <NewsLayout news={news} />

@@ -22,7 +22,7 @@ const HomeNews = ({ news, category, setCategory }) => {
       </div>
       <div className="col" >
         {news.map(newsItem => (
-          <div className="col-lg-4 col-md-6" style={{ width: '1200px' }} key={newsItem._id}>
+          <div className="col-lg-4 col-md-6 w-[1200px]" key={newsItem._id}>
             <div className="media post-block m-b-xs-30">
               <Link href={`/news/${newsItem._id}`}>
                 <a className="align-self-center">
@@ -42,11 +42,12 @@ const HomeNews = ({ news, category, setCategory }) => {
                     <a className={`post-cat cat-btn bg-color-blue-one`}>{newsItem.Category}</a>
                   </Link>
                 </div>
-                <h3 className="axil-post-title hover-line">
+                <div className="axil-post-title hover-line">
                   <Link href={`/news/${newsItem._id}`}>
+                  
                     <a>{newsItem.Headline}</a>
                   </Link>
-                </h3>
+                </div>
               </div>
             </div>
           </div>

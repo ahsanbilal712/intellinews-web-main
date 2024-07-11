@@ -27,12 +27,12 @@ function HomeTwo() {
 
   return (
     <>
-      <>
+      
       <HeadMeta metaTitle="Home"/>
       <HeaderTwo />
       <HomeNews news={data} category={category} setCategory={setCategory} />
       <FooterOne />
-    </>
+    
     </>
   );
 }
