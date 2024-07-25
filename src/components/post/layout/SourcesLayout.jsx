@@ -51,14 +51,14 @@ const SourcesLayout = ({ news }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="p-4">
+                        <div className="p-4 mx-auto items-center flex justify-center">
                           <a
                             href={source.SourceUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-500 hover:underline break-words"
                           >
-                            {source.SourceUrl}
+                            <span className="mx-auto items-center text-4xl font-bold">{source.SourceName}</span>
                           </a>
                         </div>
                       </div>
