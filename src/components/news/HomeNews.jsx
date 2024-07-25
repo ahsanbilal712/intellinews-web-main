@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { slugify } from "../../utils";
+import newsImg from "../../../public/images/news-images/news_background.jpg"
 
 const HomeNews = ({ news, category, setCategory }) => {
   const handleCategoryChange = (e) => {
@@ -27,10 +28,10 @@ const HomeNews = ({ news, category, setCategory }) => {
               <Link href={`/news/${newsItem._id}`}>
                 <a className="align-self-center">
                   <Image
-                    src={newsItem.featureImg || "/images/placeholder.png"}
+                    src={newsImg.src}
                     alt={newsItem.Headline}
                     width={285}
-                    height={285}
+                    height={145}
                     placeholder="blur"
                     blurDataURL="/images/placeholder.png"
                   />

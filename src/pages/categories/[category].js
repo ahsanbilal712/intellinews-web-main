@@ -6,6 +6,8 @@ import Image from "next/image";
 import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
+import newsImg from "../../../public/images/news-images/news_background.jpg";
+
 
 const CategoryPage = ({ news }) => {
   if (!news || news.length === 0) {
@@ -25,10 +27,10 @@ const CategoryPage = ({ news }) => {
                 <Link href={`/news/${item._id}`}>
                   <a className="align-self-center">
                     <Image
-                      src={item.featureImg || "/images/placeholder.png"}
+                      src={newsImg.src}
                       alt={item.Headline}
                       width={285}
-                      height={285}
+                      height={145}
                       placeholder="blur"
                       blurDataURL="/images/placeholder.png"
                     />
