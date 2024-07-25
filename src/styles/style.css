@@ -5331,6 +5331,24 @@ input[type="radio"] + label::after {
     margin: 0 0 3rem;
   }
 }
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 2;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
 .post-block__mid .axil-post-title {
   font-size: 2rem;
   line-height: 3rem;
