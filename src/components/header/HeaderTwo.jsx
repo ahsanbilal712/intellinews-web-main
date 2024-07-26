@@ -170,7 +170,7 @@ const HeaderTwo = () => {
                   <span />
                 </button>
               </div>
-              <div className="main-nav-wrapper">
+              <div className="main-nav-wrapper mr-[100px]">
                 <ul className="main-navigation list-inline" ref={menuRef}>
                   {/* Home page link */}
                   <li>
