@@ -8,7 +8,6 @@ import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
 import newsImg from "../../../public/images/news-images/news_background.jpg";
 
-
 const CategoryPage = ({ news }) => {
   if (!news || news.length === 0) {
     return <div>No news found for this category.</div>;
@@ -19,32 +18,35 @@ const CategoryPage = ({ news }) => {
       <HeadMeta metaTitle={`News Category: ${news[0].Category}`} />
       <HeaderTwo />
       <div className="container">
-        <h1 className="category-title">Category: {news[0].Category}</h1>
+        <h1 className="category-title mt-5">Category: {news[0].Category}</h1>
         <div className="col">
           {news.map((item) => (
             <div className="col-lg-4 col-md-6 w-[1200px]" key={item._id}>
-              <div className="media post-block m-b-xs-30">
+              <div className="flex flex-row p=10 mt-[30px]">
                 <Link href={`/news/${item._id}`}>
-                  <a className="align-self-center">
-                    <Image
-                      src={newsImg.src}
-                      alt={item.Headline}
-                      width={285}
-                      height={145}
-                      placeholder="blur"
-                      blurDataURL="/images/placeholder.png"
-                    />
+                  <a className="align-self-center ">
+                    <div className="w-[210px] h-[170px] overflow-hidden">
+                      <img
+                        src={item.image_url}
+                        alt={item.Headline}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   </a>
                 </Link>
-                <div className="media-body">
+
+                <div className="media-body px-10">
                   <div className="post-cat-group m-b-xs-10">
                     <Link href={`/news/${item._id}`}>
-                      <a className="post-cat cat-btn bg-color-blue-one">
+                      <a className={`post-cat cat-btn bg-color-blue-one`}>
                         {item.Category}
                       </a>
                     </Link>
                   </div>
-                  <div className="axil-post-title hover-line">
+                  <div
+                    className="text-5xl hover-line font-bold"
+                    style={{ lineHeight: "1.3" }}
+                  >
                     <Link href={`/news/${item._id}`}>
                       <a>{item.Headline}</a>
                     </Link>

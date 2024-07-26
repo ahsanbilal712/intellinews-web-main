@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { slugify } from "../../utils";
-import newsImg from "../../../public/images/news-images/news_background.jpg"
+import newsImg from "../../../public/images/news-images/news_background.jpg";
 
 const HomeNews = ({ news, category, setCategory }) => {
   const handleCategoryChange = (e) => {
@@ -21,23 +21,23 @@ const HomeNews = ({ news, category, setCategory }) => {
       {/* Add more categories as needed */}
       {/* </select>
       </div> */}
-      <div className="col mt-5">
+      <div className="col mt-5 mb-5">
         {news.map((newsItem) => (
-          <div className="col-lg-4 col-md-6 w-[1200px]" key={newsItem._id}>
-            <div className="media post-block m-b-xs-30">
+          <div className="col-lg-4 col-md-6 w-[1200px] " key={newsItem._id}>
+            <div className="flex flex-row p=10 mt-[30px]">
               <Link href={`/news/${newsItem._id}`}>
-                <a className="align-self-center">
-                  <Image
-                    src={newsImg.src}
-                    alt={newsItem.Headline}
-                    width={285}
-                    height={145}
-                    placeholder="blur"
-                    blurDataURL="/images/placeholder.png"
-                  />
+                <a className="align-self-center ">
+                  <div className="w-[210px] h-[170px] overflow-hidden">
+                    <img
+                      src={newsItem.image_url}
+                      alt={news.Headline}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </a>
               </Link>
-              <div className="media-body">
+
+              <div className="media-body px-10">
                 <div className="post-cat-group m-b-xs-10">
                   <Link href={`/news/${newsItem._id}`}>
                     <a className={`post-cat cat-btn bg-color-blue-one`}>
@@ -45,7 +45,10 @@ const HomeNews = ({ news, category, setCategory }) => {
                     </a>
                   </Link>
                 </div>
-                <div className="axil-post-title hover-line">
+                <div
+                  className="text-5xl hover-line font-bold"
+                  style={{ lineHeight: "1.3" }}
+                >
                   <Link href={`/news/${newsItem._id}`}>
                     <a>{newsItem.Headline}</a>
                   </Link>
