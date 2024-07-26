@@ -27,11 +27,11 @@ const HomeNews = ({ news, category, setCategory }) => {
             <div className="flex flex-row p=10 mt-[30px]">
               <Link href={`/news/${newsItem._id}`}>
                 <a className="align-self-center ">
-                  <div className="w-[210px] h-[170px] overflow-hidden">
+                  <div className="w-[210px] h-[170px] overflow-hidden group">
                     <img
                       src={newsItem.image_url}
                       alt={news.Headline}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                     />
                   </div>
                 </a>
