@@ -66,31 +66,30 @@ const CategoryNews = ({ category, news }) => {
       </h2>
       <hr className="text-lg h-1 w-full bg-slate-600 mb-4" />
       {news.slice(0, 3).map((item) => (
-        <div key={item._id} className="mb-4">
+        <div className="flex flex-row p-4 " key={item._id}>
           <Link href={`/news/${item._id}`}>
-            <a className="flex flex-col md:flex-row items-center">
-              <div className="w-full md:w-1/3 h-40 md:h-24 overflow-hidden rounded-lg">
-                <div className="w-32 h-32 overflow-hidden group">
-                  <img
-                    src={
-                      item.image_url ||
-                      "/images/news-images/news_background.jpg"
-                    }
-                    alt={item.Headline}
-                    className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
-                  />
-                </div>
-              </div>
-              <div className="md:ml-8 mt-2 md:mt-0">
-                <h3 className="text-xl font-semibold hover:underline">
-                  {item.Headline}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {formatTimeAgo(item.created_at)}
-                </p>
+            <a className="flex-shrink-0">
+              <div className="w-32 h-32 -mt-3 overflow-hidden group">
+                <img
+                  src={item.image_url}
+                  alt={item.Headline}
+                  className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
+                />
               </div>
             </a>
           </Link>
+
+          <div className="media-body px-4 flex flex-col justify-between">
+            <div
+              className="text-xl hover-line font-bold -mt-4"
+              style={{ lineHeight: "1.3" }}
+            >
+              <Link href={`/news/${item._id}`}>
+                <a>{item.Headline}</a>
+              </Link>
+            </div>
+            <div className="text-lg mt-1">{formatTimeAgo(item.created_at)}</div>
+          </div>
         </div>
       ))}
     </div>

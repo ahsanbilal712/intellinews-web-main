@@ -60,6 +60,8 @@ function HomeTwo() {
         setCategory={setCategory}
       />
       <div className="container mt-5">
+        <div className=" my-5 text-5xl font-bold">Your Topics</div>
+
         <div className="mb-3">
           <h5>Select Categories</h5>
           <div className="flex flex-wrap gap-4">
