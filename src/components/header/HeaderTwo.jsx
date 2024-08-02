@@ -164,7 +164,7 @@ const HeaderTwo = () => {
           </div>
         </div>
         <nav className="navbar bg-grey-dark-one navbar__style-four">
-          <div className="container">
+          <div className=" mx-auto w-[1420px]">
             <div className="navbar-inner justify-content-between">
               <div className="navbar-toggler-wrapper">
                 <button className="side-nav-toggler" onClick={handleShow}>
@@ -179,6 +179,11 @@ const HeaderTwo = () => {
                   <li>
                     <Link href="/">
                       <a>Home</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/latest">
+                      <a>Latest</a>
                     </Link>
                   </li>
                   {/* Dynamically add category links */}
