@@ -27,7 +27,7 @@ function HomeTwo() {
 
   return (
     <>
-      <HeadMeta metaTitle="Home" />
+      <HeadMeta metaTitle="Latest" />
       <HeaderTwo />
       <div className="flex justify-center text-5xl py-10 font-bold">
         Latest News
