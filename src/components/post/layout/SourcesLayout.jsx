@@ -5,12 +5,12 @@ import React from "react";
 const imageSources = {
   "ARY News": "/images/news-sources/ARY.png",
   "arynews.tv": "/images/news-sources/ARY.png",
-  "Dawn": "/images/news-sources/dawn.png",
+  Dawn: "/images/news-sources/dawn.png",
   "Dawn.com": "/images/news-sources/dawn.png",
   "thenews.com.pk": "/images/news-sources/thenews.png",
   "nation.com.pk": "/images/news-sources/TheNation.png",
   "The Tribune": "/images/news-sources/express_tribune.jpeg",
-  "Tribune": "/images/news-sources/express_tribune.jpeg",
+  Tribune: "/images/news-sources/express_tribune.jpeg",
 
   "Geo TV": "/images/news-sources/geo.png",
   "Geo News": "/images/news-sources/geo.png",

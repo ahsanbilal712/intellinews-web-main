@@ -21,6 +21,7 @@ module.exports = {
       "i.tribune.com.pk",
       "www.geo.tv", // Add other domains as needed
       "www.thenews.com.pk", // Add the new domain here
+      "www.nation.com.pk",
     ],
   },
   nextConfig,

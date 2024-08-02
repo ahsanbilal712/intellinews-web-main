@@ -54,7 +54,10 @@ const CategoryPage = ({ news }) => {
                   <a className="align-self-center ">
                     <div className="w-[240px] h-[170px] overflow-hidden group">
                       <img
-                        src={item.image_url}
+                        src={
+                          item.image_url ||
+                          "/images/news-images/news_background.jpg"
+                        }
                         alt={item.Headline}
                         className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                       />
