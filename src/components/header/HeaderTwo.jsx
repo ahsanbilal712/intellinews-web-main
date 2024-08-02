@@ -12,7 +12,10 @@ const HeaderTwo = () => {
     "Sports",
     "Entertainment",
     "Weather",
+    "Health",
     "Science",
+    "Technology",
+    "Economy",
   ]); // Example categories
   const menuRef = useRef();
 
