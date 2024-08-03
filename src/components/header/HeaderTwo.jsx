@@ -7,15 +7,14 @@ import OffcanvasMenu from "./OffcanvasMenu";
 const HeaderTwo = () => {
   const [categories, setCategories] = useState([
     "Pakistan",
-    "Politics",
-    "International",
+    "World",
     "Sports",
+    "Business",
     "Entertainment",
     "Weather",
     "Health",
     "Science",
     "Technology",
-    "Economy",
   ]); // Example categories
   const menuRef = useRef();
 

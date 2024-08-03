@@ -20,15 +20,14 @@ function HomeTwo() {
 
   const categories = [
     "Pakistan",
-    "Politics",
-    "International",
+    "World",
     "Sports",
+    "Business",
     "Entertainment",
     "Weather",
     "Health",
     "Science",
     "Technology",
-    "Economy",
   ];
 
   const { data, error } = useSWR(`/api/news`, fetcher);
