@@ -51,9 +51,45 @@ function HomeTwo() {
 
   return (
     <>
-      <div>
-        <h1>Heloo world</h1>
+      <HeadMeta metaTitle="Home" />
+      <HeaderTwo />
+      <TopNewsSection
+        news={data}
+        category={category}
+        setCategory={setCategory}
+      />
+      <div className="container mt-5">
+        <div className=" my-5 text-5xl font-bold">Your Topics</div>
+
+        <div className="mb-3">
+          <h5>Select Categories</h5>
+          <div className="flex flex-wrap gap-4">
+            {categories.map((category, index) => (
+              <div key={index} className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id={`category-${index}`}
+                  value={category}
+                  checked={selectedCategories.includes(category)}
+                  onChange={handleCategoryChange}
+                />
+                <label
+                  className="form-check-label ml-2"
+                  htmlFor={`category-${index}`}
+                >
+                  {category}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+        <CategoriesLatestSection
+          selectedCategories={selectedCategories}
+          newsData={data}
+        />
       </div>
+      <FooterOne />
     </>
   );
 }
