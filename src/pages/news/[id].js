@@ -38,9 +38,9 @@ export async function getServerSideProps(context) {
       useUnifiedTopology: true,
     });
 
-    const db = client.db("db");
+    const db = client.db("intelli-news-db");
     const news = await db
-      .collection("news_summaries")
+      .collection("news_data")
       .findOne({ _id: new ObjectId(id) });
 
     return {

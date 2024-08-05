@@ -102,11 +102,11 @@ export async function getServerSideProps(context) {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = client.db("db");
+  const db = client.db("intelli-news-db");
 
   // Retrieve news sorted by created_at date in descending order directly from the database
   const news = await db
-    .collection("news_summaries")
+    .collection("news_data")
     .find({ Category: category })
     .sort({ created_at: -1 }) // Sorting by created_at in descending order
     .toArray();
