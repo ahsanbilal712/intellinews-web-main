@@ -31,7 +31,7 @@ const NewsLayout = ({ news }) => {
             Image Credits: {news.Image_source_name}
           </div>
         </div>
-        <hr class="h-[2px] my-8 bg-gray-700 border-0 dark:bg-gray-900" />
+        <hr className="h-[2px] my-8 bg-gray-700 border-0 dark:bg-gray-900" />
 
         <p className=" mt-16">{news.Summary}</p>
 

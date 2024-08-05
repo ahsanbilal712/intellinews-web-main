@@ -10,19 +10,15 @@ const nextConfig = {
     config.resolve.fallback = { fs: false };
     return config;
   },
-};
-
-module.exports = nextConfig;
-
-module.exports = {
   images: {
     domains: [
       "i.dawn.com",
       "i.tribune.com.pk",
-      "www.geo.tv", // Add other domains as needed
-      "www.thenews.com.pk", // Add the new domain here
+      "www.geo.tv",
+      "www.thenews.com.pk",
       "www.nation.com.pk",
     ],
   },
-  nextConfig,
 };
+
+module.exports = nextConfig;

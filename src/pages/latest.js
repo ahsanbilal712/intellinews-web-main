@@ -9,13 +9,16 @@ import { useState } from "react";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-function HomeTwo() {
+function LatestNews() {
   const router = useRouter();
   const [category, setCategory] = useState("");
   const { data, error } = useSWR(`/api/news?category=${category}`, fetcher);
 
   if (error) return <div>Failed to load data.</div>;
   if (!data) return <div>Loading...</div>;
+
+  // Log data to check its structure
+  console.log("Data fetched from API:", data);
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
@@ -27,15 +30,19 @@ function HomeTwo() {
 
   return (
     <>
-      <HeadMeta metaTitle="Latest" />
+      <HeadMeta metaTitle="LatestNews" />
       <HeaderTwo />
       <div className="flex justify-center text-5xl py-10 font-bold">
         Latest News
       </div>
-      <HomeNews news={data} category={category} setCategory={setCategory} />
+      <HomeNews
+        news={Array.isArray(data) ? data : []}
+        category={category}
+        setCategory={setCategory}
+      />
       <FooterOne />
     </>
   );
 }
 
-export default HomeTwo;
+export default LatestNews;
