@@ -1,13 +1,13 @@
 // src/pages/index.js (or HomeTwo component)
 
 import Link from "next/link";
-import HeadMeta from "./components/elements/HeadMeta";
-import FooterOne from "./components/footer/FooterOne";
-import HeaderTwo from "./components/header/HeaderTwo";
+import HeadMeta from "../components/elements/HeadMeta";
+import FooterOne from "../components/footer/FooterOne";
+import HeaderTwo from "../components/header/HeaderTwo";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import CategoriesLatestSection from "./components/news/CategoriesLatestSection";
-import TopNewsSection from "./components/news/TopNewsSection";
+import CategoriesLatestSection from "../components/news/CategoriesLatestSection";
+import TopNewsSection from "../components/news/TopNewsSection";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
