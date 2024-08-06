@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
 
@@ -22,6 +22,9 @@ function formatTimeAgo(createdAt) {
 }
 
 const HomeNews = ({ news = [], category, setCategory }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const newsPerPage = 20;
+
   if (!Array.isArray(news)) {
     return <div>No news available</div>;
   }
@@ -31,11 +34,27 @@ const HomeNews = ({ news = [], category, setCategory }) => {
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
 
+  // Calculate the indices for the current page
+  const startIndex = (currentPage - 1) * newsPerPage;
+  const endIndex = startIndex + newsPerPage;
+  const currentNews = sortedNews.slice(startIndex, endIndex);
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(sortedNews.length / newsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Determine page numbers to display
+  const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
+  const endPage = Math.min(startPage + 4, totalPages);
+
   return (
     <div className="container">
       <div className="col mt-5 mb-5">
-        {sortedNews.length > 0 ? (
-          sortedNews.map((newsItem) => (
+        {currentNews.length > 0 ? (
+          currentNews.map((newsItem) => (
             <div className="col-lg-4 col-md-6 w-[1200px]" key={newsItem._id}>
               <div className="flex flex-row p=10 mt-[30px]">
                 <Link href={`/news/${newsItem._id}`}>
@@ -74,6 +93,46 @@ const HomeNews = ({ news = [], category, setCategory }) => {
           ))
         ) : (
           <div>No news available</div>
+        )}
+      </div>
+      {/* Pagination Controls */}
+      <div className="flex justify-center my-10">
+        {currentPage > 1 && (
+          <>
+            <button
+              onClick={() => handlePageChange(1)}
+              className="px-4 py-2 mx-2 bg-gray-200 rounded"
+            >
+              1
+            </button>
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              className="px-4 py-2 mx-2 bg-gray-200 rounded"
+            >
+              Previous
+            </button>
+          </>
+        )}
+        {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
+          <button
+            key={startPage + index}
+            onClick={() => handlePageChange(startPage + index)}
+            className={`px-4 py-2 mx-2 ${
+              startPage + index === currentPage
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200"
+            } rounded`}
+          >
+            {startPage + index}
+          </button>
+        ))}
+        {currentPage < totalPages && (
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="px-4 py-2 mx-2 bg-gray-200 rounded"
+          >
+            Next
+          </button>
         )}
       </div>
     </div>
