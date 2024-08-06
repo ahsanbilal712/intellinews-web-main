@@ -1,4 +1,5 @@
 // src/pages/news/[id].js
+
 import { MongoClient, ObjectId } from "mongodb";
 import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
@@ -7,24 +8,22 @@ import NewsLayout from "../../components/post/layout/NewsLayout";
 
 const NewsPage = ({ news }) => {
   return (
-    <>
-      <div className="min-h-screen flex flex-col">
-        <HeadMeta metaTitle={news ? news.Headline : "News Not Found"} />
-        <HeaderTwo />
-        {news ? (
-          <NewsLayout news={news} />
-        ) : (
-          <div className="flex-grow flex justify-center items-center">
-            <h1 className="text-3xl font-bold">News Not Found</h1>
-          </div>
-        )}
-        <FooterOne />
-      </div>
-    </>
+    <div className="min-h-screen flex flex-col">
+      <HeadMeta metaTitle={news ? news.Headline : "News Not Found"} />
+      <HeaderTwo />
+      {news ? (
+        <NewsLayout news={news} />
+      ) : (
+        <div className="flex-grow flex justify-center items-center">
+          <h1 className="text-3xl font-bold">News Not Found</h1>
+        </div>
+      )}
+      <FooterOne />
+    </div>
   );
 };
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = async (context) => {
   const { id } = context.params;
 
   if (!ObjectId.isValid(id)) {
@@ -56,6 +55,6 @@ export async function getServerSideProps(context) {
       client.close();
     }
   }
-}
+};
 
 export default NewsPage;

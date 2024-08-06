@@ -2,11 +2,9 @@
 
 import { MongoClient } from "mongodb";
 import Link from "next/link";
-import Image from "next/image";
 import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
-import newsImg from "../../../public/images/news-images/news_background.jpg";
 
 // Utility function to format the time ago
 function formatTimeAgo(createdAt) {
@@ -51,7 +49,7 @@ const CategoryPage = ({ news }) => {
             <div className="col-lg-4 col-md-6 w-[1200px]" key={item._id}>
               <div className="flex flex-row p=10 mt-[30px]">
                 <Link href={`/news/${item._id}`}>
-                  <a className="align-self-center ">
+                  <a className="align-self-center">
                     <div className="w-[240px] h-[170px] overflow-hidden group">
                       <img
                         src={
@@ -95,7 +93,7 @@ const CategoryPage = ({ news }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = async (context) => {
   const { category } = context.params;
 
   const client = await MongoClient.connect(process.env.MONGODB_URI, {
@@ -117,6 +115,6 @@ export async function getServerSideProps(context) {
       news: news.map((document) => JSON.parse(JSON.stringify(document))),
     },
   };
-}
+};
 
 export default CategoryPage;
