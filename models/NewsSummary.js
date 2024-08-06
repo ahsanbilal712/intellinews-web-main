@@ -21,7 +21,7 @@ const newsSummarySchema = new mongoose.Schema(
     },
   },
   {
-    collection: "news_data",
+    collection: "data_news",
     // Disable automatic updatedAt field
     timestamps: {
       createdAt: "created_at",

@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
 
     const db = client.db("intelli-news-db");
     const news = await db
-      .collection("news_data")
+      .collection("data_news")
       .findOne({ _id: new ObjectId(id) });
 
     return {

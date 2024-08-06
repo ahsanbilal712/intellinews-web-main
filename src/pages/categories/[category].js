@@ -106,7 +106,7 @@ export async function getServerSideProps(context) {
 
   // Retrieve news sorted by created_at date in descending order directly from the database
   const news = await db
-    .collection("news_data")
+    .collection("data_news")
     .find({ Category: category })
     .sort({ created_at: -1 }) // Sorting by created_at in descending order
     .toArray();
