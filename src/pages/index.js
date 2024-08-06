@@ -54,15 +54,13 @@ function HomeTwo() {
   return (
     <>
       {/* Add AdSense script directly if needed */}
-      <Head>
-        <title>Home</title>
-        <meta name="description" content="Your site description" />
+      <head>
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5812499395538486"
-          crossOrigin="anonymous"
+          crossorigin="anonymous"
         ></script>
-      </Head>
+      </head>
 
       <HeadMeta metaTitle="Home" />
       <HeaderTwo />
