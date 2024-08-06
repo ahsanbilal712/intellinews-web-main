@@ -31,16 +31,16 @@ const TopNewsSection = ({ news }) => {
 
   return (
     <div className="recent-news-wrapper section-gap pt-4 lg:pt-16">
-      <div className="container w-[1280px]">
-        <div className=" mt-5 text-5xl font-bold">Top News</div>
+      <div className="container mx-auto w-full lg:w-[1280px]">
+        <div className="mt-5 mb-2 text-2xl lg:text-5xl font-bold">Top News</div>
 
-        <div className="row">
-          <div className="col-lg-6">
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-1/2 mb-8 mt-3 lg:mb-0">
             {sortedNews.slice(0, 1).map((newsItem) => (
-              <div className="flex flex-col py-4 mt-8" key={newsItem._id}>
+              <div className="flex flex-col py-4" key={newsItem._id}>
                 <Link href={`/news/${newsItem._id}`}>
                   <a className="flex-shrink-0">
-                    <div className="w-full h-full overflow-hidden group">
+                    <div className="w-full h-96 lg:h-full overflow-hidden group">
                       <img
                         src={newsItem.image_url}
                         alt={newsItem.Headline}
@@ -51,40 +51,42 @@ const TopNewsSection = ({ news }) => {
                 </Link>
 
                 <div className="media-body flex flex-col justify-between">
-                  <div className="post-cat-group px-4 -mt-[50px] mb-2 ">
+                  <div className="post-cat-group px-4 -mt-20 lg:-mt-[50px] mb-2">
                     <Link href={`/news/${newsItem._id}`}>
-                      <a className="post-cat cat-btn bg-color-blue-one text-white px-3  ">
+                      <a className="post-cat cat-btn bg-color-blue-one text-white px-3">
                         {newsItem.Category}
                       </a>
                     </Link>
                   </div>
                   <div
-                    className="text-5xl hover-line font-bold mt-10"
+                    className="text-xl lg:text-5xl hover-line font-bold mt-4 lg:mt-10"
                     style={{ lineHeight: "1.3" }}
                   >
                     <Link href={`/news/${newsItem._id}`}>
                       <a>{newsItem.Headline}</a>
                     </Link>
                   </div>
-                  <div className="text-lg mt-1 flex justify-end">
+                  <div className="text-sm lg:text-lg mt-2 flex ">
                     {formatTimeAgo(newsItem.created_at)}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="col-lg-6 ">
-            <div className="flex justify-end mr-20 hover-line">
-              <Link href="/latest">View All</Link>
+          <div className="w-full lg:w-1/2">
+            <div className="flex justify-end mr-4 lg:mr-20 hover-line">
+              <Link href="/latest">
+                <a className="text-sm lg:text-2xl ">View All</a>
+              </Link>
             </div>
 
             <div className="axil-recent-news">
               <div className="axil-content">
                 {sortedNews.slice(1, 4).map((newsItem) => (
-                  <div className="flex flex-row p-4 " key={newsItem._id}>
+                  <div className="flex flex-row p-4 lg:p-4" key={newsItem._id}>
                     <Link href={`/news/${newsItem._id}`}>
                       <a className="flex-shrink-0">
-                        <div className="w-64 h-52 overflow-hidden group">
+                        <div className="w-48 h-36 lg:w-64 lg:h-52 overflow-hidden group">
                           <img
                             src={newsItem.image_url}
                             alt={newsItem.Headline}
@@ -103,14 +105,14 @@ const TopNewsSection = ({ news }) => {
                         </Link>
                       </div>
                       <div
-                        className="text-3xl hover-line font-bold -mt-4"
+                        className="text-xl lg:text-2xl hover-line font-bold -mt-8 lg:-mt-8"
                         style={{ lineHeight: "1.3" }}
                       >
                         <Link href={`/news/${newsItem._id}`}>
                           <a>{newsItem.Headline}</a>
                         </Link>
                       </div>
-                      <div className="text-lg mt-1">
+                      <div className="text-sm lg:text-lg mt-1 ">
                         {formatTimeAgo(newsItem.created_at)}
                       </div>
                     </div>
