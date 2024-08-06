@@ -6,6 +6,7 @@ import HomeNews from "../components/news/HomeNews";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Loading from "../components/loading/Loading";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -15,7 +16,7 @@ function LatestNews() {
   const { data, error } = useSWR(`/api/news?category=${category}`, fetcher);
 
   if (error) return <div>Failed to load data.</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <Loading />;
 
   // Log data to check its structure
   console.log("Data fetched from API:", data);

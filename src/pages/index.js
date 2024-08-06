@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import CategoriesLatestSection from "../components/news/CategoriesLatestSection";
 import TopNewsSection from "../components/news/TopNewsSection";
+import Loading from "../components/loading/Loading";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -33,7 +34,7 @@ function HomeTwo() {
   const { data, error } = useSWR(`/api/news`, fetcher);
 
   if (error) return <div>Failed to load data.</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <Loading />;
 
   // Handle category selection/deselection
   const handleCategoryChange = (e) => {
