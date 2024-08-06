@@ -1,28 +1,27 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/style.css";
-import Script from 'next/script'
-
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-    {/*  Global site tag (gtag.js) - Google Analytics */}
-    <Script
-      src="https://www.googletagmanager.com/gtag/js?id=G-E448GXQHG8"
-      strategy="afterInteractive"
-    />
-    <Script id="google-analytics" strategy="afterInteractive">
-      {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-      
-        gtag('config', 'G-E448GXQHG8');
+      {/*  Global site tag (gtag.js) - Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-ZBLBZF7D7R"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZBLBZF7D7R');
       `}
-    </Script>
-    <Component {...pageProps} />
+      </Script>
+      <Component {...pageProps} />
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
