@@ -62,6 +62,8 @@ function HomeTwo() {
         ></script>
       </head>
 
+      <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
+
       <HeadMeta metaTitle="Home" />
       <HeaderTwo />
 
