@@ -40,7 +40,7 @@ const TopNewsSection = ({ news }) => {
               <div className="flex flex-col py-4" key={newsItem._id}>
                 <Link href={`/news/${newsItem._id}`}>
                   <a className="flex-shrink-0">
-                    <div className="w-full h-96 lg:h-full overflow-hidden group">
+                    <div className="w-full h-96 lg:h-[315px] overflow-hidden group">
                       <img
                         src={newsItem.image_url}
                         alt={newsItem.Headline}
