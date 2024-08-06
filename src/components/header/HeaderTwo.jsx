@@ -18,7 +18,6 @@ const HeaderTwo = () => {
   ]); // Example categories
   const menuRef = useRef();
 
-  // Existing Menu Toggle Functionality
   const toggleDropdownMenu = () => {
     const dropdownSelect = menuRef.current.childNodes;
     let dropdownList = [];
@@ -54,15 +53,11 @@ const HeaderTwo = () => {
     toggleDropdownMenu();
   }, []);
 
-  // Offcanvas Menu
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Header Search
   const [searchshow, setSearchShow] = useState(false);
-
   const headerSearchShow = () => {
     setSearchShow(true);
   };
@@ -70,9 +65,7 @@ const HeaderTwo = () => {
     setSearchShow(false);
   };
 
-  // Mobile Menu Toggle
   const [mobileToggle, setMobileToggle] = useState(false);
-
   const MobileMenuToggler = () => {
     setMobileToggle(!mobileToggle);
     const HtmlTag = document.querySelector("html");
@@ -98,7 +91,11 @@ const HeaderTwo = () => {
 
   return (
     <>
-      <OffcanvasMenu ofcshow={show} ofcHandleClose={handleClose} />
+      <OffcanvasMenu
+        ofcshow={show}
+        ofcHandleClose={handleClose}
+        categories={categories}
+      />
       <header className="page-header">
         <div className="header-top header-top__style-two bg-grey-dark-one">
           <div className="container">
@@ -134,7 +131,6 @@ const HeaderTwo = () => {
                   </a>
                 </Link>
               </div>
-
               <div className="col-md-4">
                 <ul className="ml-auto social-share header-top__social-share justify-content-end">
                   <li>
@@ -164,7 +160,7 @@ const HeaderTwo = () => {
         </div>
         <nav className="navbar bg-grey-dark-one navbar__style-four">
           <div className=" mx-auto w-[1420px]">
-            <div className="navbar-inner justify-content-between">
+            <div className="navbar-inner flex justify-center lg:ml-24">
               <div className="navbar-toggler-wrapper">
                 <button className="side-nav-toggler" onClick={handleShow}>
                   <span />
@@ -174,7 +170,6 @@ const HeaderTwo = () => {
               </div>
               <div className="main-nav-wrapper mr-[100px]">
                 <ul className="main-navigation list-inline" ref={menuRef}>
-                  {/* Home page link */}
                   <li>
                     <Link href="/">
                       <a>Home</a>
@@ -185,7 +180,6 @@ const HeaderTwo = () => {
                       <a>Latest</a>
                     </Link>
                   </li>
-                  {/* Dynamically add category links */}
                   {categories.map((category, index) => (
                     <li key={`category-${index}`}>
                       <Link href={`/categories/${category}`}>
