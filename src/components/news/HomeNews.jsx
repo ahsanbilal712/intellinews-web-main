@@ -11,13 +11,15 @@ function formatTimeAgo(createdAt) {
   const days = Math.floor(hours / 24);
 
   if (seconds < 60) {
-    return `published just now`;
+    return `Published Just Now`;
   } else if (minutes < 60) {
-    return `published ${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
+    return `Published About ${minutes} ${
+      minutes === 1 ? "Minute" : "Minutes"
+    } Ago`;
   } else if (hours < 24) {
-    return `published ${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+    return `Published About ${hours} ${hours === 1 ? "Hour" : "Hours"} Ago`;
   } else {
-    return `published ${days} ${days === 1 ? "day" : "days"} ago`;
+    return `Published About ${days} ${days === 1 ? "Day" : "Days"} Ago`;
   }
 }
 
@@ -55,11 +57,14 @@ const HomeNews = ({ news = [], category, setCategory }) => {
       <div className="col mt-5 mb-5">
         {currentNews.length > 0 ? (
           currentNews.map((newsItem) => (
-            <div className="col-lg-4 col-md-6 w-[1200px]" key={newsItem._id}>
-              <div className="flex flex-row p=10 mt-[30px]">
+            <div
+              className="col-lg-4 col-md-6 w-full md:w-[600px] lg:w-[800px] xl:w-[1200px]"
+              key={newsItem._id}
+            >
+              <div className="flex flex-col md:flex-row p-4 mt-[30px]">
                 <Link href={`/news/${newsItem._id}`}>
                   <a className="align-self-center">
-                    <div className="w-[210px] h-[170px] overflow-hidden group">
+                    <div className="w-[400px] h-[200px]  lg:w-[210px]  lg:h-[170px] overflow-hidden group">
                       <img
                         src={newsItem.image_url}
                         alt={newsItem.Headline}
@@ -68,8 +73,8 @@ const HomeNews = ({ news = [], category, setCategory }) => {
                     </div>
                   </a>
                 </Link>
-                <div className="media-body px-10 flex justify-between flex-col">
-                  <div className="post-cat-group m-b-xs-10">
+                <div className="media-body  -mt-16 md:px-10 flex -ml-5 justify-between flex-col">
+                  <div className="post-cat-group ml-3 m-b-xs-10">
                     <Link href={`/news/${newsItem._id}`}>
                       <a className={`post-cat cat-btn bg-color-blue-one`}>
                         {newsItem.Category}
@@ -77,14 +82,14 @@ const HomeNews = ({ news = [], category, setCategory }) => {
                     </Link>
                   </div>
                   <div
-                    className="text-5xl hover-line -mt-12 font-bold"
+                    className="text-3xl md:text-2xl lg:text-3xl xl:text-5xl hover-line  md:-mt-4 lg:-mt-8 font-bold"
                     style={{ lineHeight: "1.3" }}
                   >
                     <Link href={`/news/${newsItem._id}`}>
                       <a>{newsItem.Headline}</a>
                     </Link>
                   </div>
-                  <div className="text-2xl">
+                  <div className="text-sm mt-3 md:text-lg lg:text-xl">
                     {formatTimeAgo(newsItem.created_at)}
                   </div>
                 </div>
@@ -101,13 +106,13 @@ const HomeNews = ({ news = [], category, setCategory }) => {
           <>
             <button
               onClick={() => handlePageChange(1)}
-              className="px-4 py-2 mx-2 bg-gray-200 rounded"
+              className="px-3 py-1 md:px-4 md:py-2 mx-1 md:mx-2 bg-gray-200 rounded"
             >
               1
             </button>
             <button
               onClick={() => handlePageChange(currentPage - 1)}
-              className="px-4 py-2 mx-2 bg-gray-200 rounded"
+              className="px-3 py-1 md:px-4 md:py-2 mx-1 md:mx-2 bg-gray-200 rounded"
             >
               Previous
             </button>
@@ -117,7 +122,7 @@ const HomeNews = ({ news = [], category, setCategory }) => {
           <button
             key={startPage + index}
             onClick={() => handlePageChange(startPage + index)}
-            className={`px-4 py-2 mx-2 ${
+            className={`px-3 py-1 md:px-4 md:py-2 mx-1 md:mx-2 ${
               startPage + index === currentPage
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200"
@@ -129,7 +134,7 @@ const HomeNews = ({ news = [], category, setCategory }) => {
         {currentPage < totalPages && (
           <button
             onClick={() => handlePageChange(currentPage + 1)}
-            className="px-4 py-2 mx-2 bg-gray-200 rounded"
+            className="px-3 py-1 md:px-4 md:py-2 mx-1 md:mx-2 bg-gray-200 rounded"
           >
             Next
           </button>
