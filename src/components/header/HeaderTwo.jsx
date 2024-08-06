@@ -100,7 +100,7 @@ const HeaderTwo = () => {
     <>
       <OffcanvasMenu ofcshow={show} ofcHandleClose={handleClose} />
       <header className="page-header">
-        <div className="header-top header-top__style-two bg-grey-dark-seven">
+        <div className="header-top header-top__style-two bg-grey-dark-one">
           <div className="container">
             <div className="row justify-content-between align-items-center">
               <div className="col-md-4">

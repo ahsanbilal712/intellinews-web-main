@@ -30,9 +30,11 @@ const TopNewsSection = ({ news }) => {
   );
 
   return (
-    <div className="recent-news-wrapper section-gap pt-4 lg:pt-16">
+    <div className="recent-news-wrapper section-gap pt-4 lg:pt-16 bg-[#191919]">
       <div className="container mx-auto w-full lg:w-[1280px]">
-        <div className="mt-5 mb-2 text-2xl lg:text-5xl font-bold">Top News</div>
+        <div className="mt-5 mb-2 text-2xl lg:text-5xl text-white font-bold">
+          Top News
+        </div>
 
         <div className="flex flex-wrap">
           <div className="w-full lg:w-1/2 mb-8 mt-3 lg:mb-0">
@@ -59,14 +61,14 @@ const TopNewsSection = ({ news }) => {
                     </Link>
                   </div>
                   <div
-                    className="text-xl lg:text-5xl hover-line font-bold mt-4 lg:mt-10"
+                    className="text-xl text-white lg:text-5xl hover-line font-bold mt-4 lg:mt-10"
                     style={{ lineHeight: "1.3" }}
                   >
                     <Link href={`/news/${newsItem._id}`}>
-                      <a>{newsItem.Headline}</a>
+                      <a className="text-white">{newsItem.Headline}</a>
                     </Link>
                   </div>
-                  <div className="text-sm lg:text-lg mt-2 flex ">
+                  <div className="text-sm text-white lg:text-lg mt-2 flex ">
                     {formatTimeAgo(newsItem.created_at)}
                   </div>
                 </div>
@@ -76,7 +78,7 @@ const TopNewsSection = ({ news }) => {
           <div className="w-full lg:w-1/2">
             <div className="flex justify-end mr-4 lg:mr-20 hover-line">
               <Link href="/latest">
-                <a className="text-sm lg:text-2xl ">View All</a>
+                <a className="text-sm text-white lg:text-2xl ">View All</a>
               </Link>
             </div>
 
@@ -105,14 +107,14 @@ const TopNewsSection = ({ news }) => {
                         </Link>
                       </div>
                       <div
-                        className="text-xl lg:text-2xl hover-line font-bold -mt-8 lg:-mt-8"
+                        className="text-xl lg:text-2xl text-white hover-line font-bold -mt-8 lg:-mt-8"
                         style={{ lineHeight: "1.3" }}
                       >
                         <Link href={`/news/${newsItem._id}`}>
-                          <a>{newsItem.Headline}</a>
+                          <a className="text-white">{newsItem.Headline}</a>
                         </Link>
                       </div>
-                      <div className="text-sm lg:text-lg mt-1 ">
+                      <div className="text-sm text-white lg:text-lg mt-1 ">
                         {formatTimeAgo(newsItem.created_at)}
                       </div>
                     </div>
