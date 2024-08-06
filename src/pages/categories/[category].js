@@ -55,7 +55,7 @@ const CategoryPage = ({ news }) => {
               <div className="flex flex-col md:flex-row p-4 mt-[30px]">
                 <Link href={`/news/${item._id}`}>
                   <a className="align-self-center">
-                    <div className="w-full w-[400px] h-[200px] lg:w-[210px] lg:h-[170px] overflow-hidden group">
+                    <div className=" w-[400px] h-[200px] lg:w-[210px] lg:h-[170px] overflow-hidden group">
                       <img
                         src={
                           item.image_url ||
