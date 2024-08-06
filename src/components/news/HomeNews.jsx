@@ -73,7 +73,7 @@ const HomeNews = ({ news = [], category, setCategory }) => {
                     </div>
                   </a>
                 </Link>
-                <div className="media-body  -mt-16 md:px-10 flex -ml-5 justify-between flex-col">
+                <div className="media-body lg:mt-0 -mt-16 md:px-10 flex -ml-5 justify-between flex-col">
                   <div className="post-cat-group ml-3 m-b-xs-10">
                     <Link href={`/news/${newsItem._id}`}>
                       <a className={`post-cat cat-btn bg-color-blue-one`}>
