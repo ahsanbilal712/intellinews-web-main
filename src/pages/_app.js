@@ -2,12 +2,17 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/style.css";
 import Script from "next/script";
+import AdSense from "../components/Adsense";
 
 // Define the custom App component
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <html lang="en">
       {/* Google Analytics Script */}
+      <head>
+        <AdSense pid="ca-pub-5812499395538486" />
+        <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
+      </head>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-ZBLBZF7D7R"
         strategy="afterInteractive"
@@ -32,7 +37,7 @@ function MyApp({ Component, pageProps }) {
 
       {/* Render the current page's component */}
       <Component {...pageProps} />
-    </>
+    </html>
   );
 }
 
