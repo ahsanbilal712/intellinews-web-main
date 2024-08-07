@@ -11,6 +11,7 @@ const imageSources = {
   "nation.com.pk": "/images/news-sources/TheNation.png",
   "The Tribune": "/images/news-sources/express_tribune.jpeg",
   Tribune: "/images/news-sources/express_tribune.jpeg",
+  "The Nation": "/images/news-sources/TheNation.png",
 
   "Geo TV": "/images/news-sources/geo.png",
   "Geo News": "/images/news-sources/geo.png",
