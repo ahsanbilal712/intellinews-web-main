@@ -57,9 +57,8 @@ function HomeTwo() {
       {/* Add AdSense script directly if needed */}
       <head>
         <AdSense pid="ca-pub-5812499395538486" />
+        <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
       </head>
-
-      <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
 
       <HeadMeta metaTitle="Home" />
       <body>
