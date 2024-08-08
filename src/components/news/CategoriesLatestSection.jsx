@@ -84,7 +84,7 @@ const CategoryNews = ({ category, news }) => {
               className="text-xl hover-line font-bold -mt-4"
               style={{ lineHeight: "1.3" }}
             >
-              <Link href={`/news/${item._id}`}>
+              <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
                 <a>{item.Headline}</a>
               </Link>
             </div>
