@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { slugify } from "../src/utils";
 
 // Define the schema with only the created_at timestamp
 const newsSummarySchema = new mongoose.Schema(
@@ -29,6 +30,13 @@ const newsSummarySchema = new mongoose.Schema(
     },
   }
 );
+
+newsSummarySchema.pre("save", function (next) {
+  if (this.isModified("Headline")) {
+    this.slug = slugify(this.Headline, { lower: true, strict: true });
+  }
+  next();
+});
 
 const NewsSummary =
   mongoose.models.NewsSummary ||

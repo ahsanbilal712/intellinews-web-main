@@ -1,6 +1,4 @@
-// src/pages/news/[id].js
-
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
@@ -24,9 +22,9 @@ const NewsPage = ({ news }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const { id } = context.params;
+  const { headline } = context.params;
 
-  if (!ObjectId.isValid(id)) {
+  if (!headline) {
     return { props: { news: null } };
   }
 
@@ -40,7 +38,7 @@ export const getServerSideProps = async (context) => {
     const db = client.db("intelli-news-db");
     const news = await db
       .collection("data_news")
-      .findOne({ _id: new ObjectId(id) });
+      .findOne({ Headline: decodeURIComponent(headline) });
 
     return {
       props: {
