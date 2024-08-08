@@ -67,7 +67,7 @@ const CategoryNews = ({ category, news }) => {
       <hr className="text-lg h-1 w-full bg-slate-600 mb-4" />
       {news.slice(0, 3).map((item) => (
         <div className="flex flex-row p-4 " key={item._id}>
-          <Link href={`/news/${encodeURIComponent(newsItem.Headline)}`}>
+          <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
             <a className="flex-shrink-0">
               <div className="w-32 h-32 -mt-3 overflow-hidden group">
                 <img
