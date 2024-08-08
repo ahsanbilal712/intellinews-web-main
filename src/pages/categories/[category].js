@@ -53,7 +53,7 @@ const CategoryPage = ({ news }) => {
               key={item._id}
             >
               <div className="flex flex-col md:flex-row p-4 mt-[30px]">
-                <Link href={`/news/${item._id}`}>
+                <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
                   <a className="align-self-center">
                     <div className=" w-[400px] h-[200px] lg:w-[210px] lg:h-[170px] overflow-hidden group">
                       <img
@@ -70,7 +70,7 @@ const CategoryPage = ({ news }) => {
 
                 <div className="media-body lg:mt-0 -mt-16 md:px-10 flex -ml-5 justify-between flex-col">
                   <div className="post-cat-group ml-3 m-b-xs-10">
-                    <Link href={`/news/${item._id}`}>
+                    <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
                       <a className={`post-cat cat-btn bg-color-blue-one`}>
                         {item.Category}
                       </a>
@@ -80,7 +80,7 @@ const CategoryPage = ({ news }) => {
                     className="text-3xl md:text-2xl lg:text-3xl xl:text-5xl hover-line md:-mt-4 lg:-mt-8 font-bold"
                     style={{ lineHeight: "1.3" }}
                   >
-                    <Link href={`/news/${item._id}`}>
+                    <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
                       <a>{item.Headline}</a>
                     </Link>
                   </div>

@@ -40,7 +40,7 @@ const TopNewsSection = ({ news }) => {
           <div className="w-full lg:w-1/2 mb-8 mt-3 lg:mb-0">
             {sortedNews.slice(0, 1).map((newsItem) => (
               <div className="flex flex-col py-4" key={newsItem._id}>
-                <Link href={`/news/${newsItem._id}`}>
+                <Link href={`/news/${encodeURIComponent(newsItem.Headline)}`}>
                   <a className="flex-shrink-0">
                     <div className="w-full h-96 lg:h-[315px] overflow-hidden group">
                       <img
@@ -54,7 +54,9 @@ const TopNewsSection = ({ news }) => {
 
                 <div className="media-body flex flex-col justify-between">
                   <div className="post-cat-group px-4 -mt-20 lg:-mt-[50px] mb-2">
-                    <Link href={`/news/${newsItem._id}`}>
+                    <Link
+                      href={`/news/${encodeURIComponent(newsItem.Headline)}`}
+                    >
                       <a className="post-cat cat-btn bg-color-blue-one text-white px-3">
                         {newsItem.Category}
                       </a>
@@ -64,7 +66,9 @@ const TopNewsSection = ({ news }) => {
                     className="text-xl text-white lg:text-5xl hover-line font-bold mt-4 lg:mt-10"
                     style={{ lineHeight: "1.3" }}
                   >
-                    <Link href={`/news/${newsItem._id}`}>
+                    <Link
+                      href={`/news/${encodeURIComponent(newsItem.Headline)}`}
+                    >
                       <a className="text-white">{newsItem.Headline}</a>
                     </Link>
                   </div>
@@ -86,7 +90,9 @@ const TopNewsSection = ({ news }) => {
               <div className="axil-content">
                 {sortedNews.slice(1, 4).map((newsItem) => (
                   <div className="flex flex-row p-4 lg:p-4" key={newsItem._id}>
-                    <Link href={`/news/${newsItem._id}`}>
+                    <Link
+                      href={`/news/${encodeURIComponent(newsItem.Headline)}`}
+                    >
                       <a className="flex-shrink-0">
                         <div className="w-48 h-36 lg:w-64 lg:h-52 overflow-hidden group">
                           <img
@@ -100,7 +106,11 @@ const TopNewsSection = ({ news }) => {
 
                     <div className="media-body px-4 flex flex-col justify-between">
                       <div className="post-cat-group mb-2">
-                        <Link href={`/news/${newsItem._id}`}>
+                        <Link
+                          href={`/news/${encodeURIComponent(
+                            newsItem.Headline
+                          )}`}
+                        >
                           <a className="post-cat cat-btn bg-color-blue-one text-white px-3">
                             {newsItem.Category}
                           </a>
@@ -110,7 +120,11 @@ const TopNewsSection = ({ news }) => {
                         className="text-xl lg:text-2xl text-white hover-line font-bold -mt-8 lg:-mt-8"
                         style={{ lineHeight: "1.3" }}
                       >
-                        <Link href={`/news/${newsItem._id}`}>
+                        <Link
+                          href={`/news/${encodeURIComponent(
+                            newsItem.Headline
+                          )}`}
+                        >
                           <a className="text-white">{newsItem.Headline}</a>
                         </Link>
                       </div>
