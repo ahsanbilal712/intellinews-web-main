@@ -40,7 +40,7 @@ export const getServerSideProps = async (context) => {
 
     const db = client.db("intelli-news-db");
     // Replace hyphens with spaces and decode the URL component
-    const decodedHeadline = decodeURIComponent(headline.replace(/-/g, " "));
+    const decodedHeadline = decodeURIComponent(headline);
     const news = await db
       .collection("data_news")
       .findOne({ Headline: decodedHeadline });

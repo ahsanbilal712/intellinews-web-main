@@ -9,7 +9,7 @@ import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
 
 const formatHeadlineForUrl = (headline) => {
-  return encodeURIComponent(headline.replace(/\s+/g, "-"));
+  return encodeURIComponent(headline);
 };
 
 // Utility function to format the time ago
