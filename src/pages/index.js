@@ -62,15 +62,6 @@ function HomeTwo() {
           content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
         />
         <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-ZBLBZF7D7R');
-        `}
-        </Script>
       </head>
 
       <HeadMeta metaTitle="Home" />
