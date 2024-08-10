@@ -22,6 +22,10 @@ function MyApp({ Component, pageProps }) {
           />
         </head>
         <Script
+          name="google-site-verification"
+          content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
+        />
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-ZBLBZF7D7R"
           strategy="afterInteractive"
         />
