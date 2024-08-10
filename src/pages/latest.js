@@ -2,6 +2,8 @@ import Link from "next/link";
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterOne from "../components/footer/FooterOne";
 import HeaderTwo from "../components/header/HeaderTwo";
+import Breadcrumb from "../components/common/Breadcrumb";
+
 import HomeNews from "../components/news/HomeNews";
 import useSWR from "swr";
 import { useRouter } from "next/router";
@@ -32,7 +34,10 @@ function LatestNews() {
   return (
     <>
       <HeadMeta metaTitle="LatestNews" />
+
       <HeaderTwo />
+      <Breadcrumb aPage="Latest" />
+
       <div className="flex justify-center text-5xl py-10 font-bold">
         Latest News
       </div>

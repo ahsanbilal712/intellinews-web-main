@@ -3,12 +3,15 @@ import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
 import NewsLayout from "../../components/post/layout/NewsLayout";
+import Breadcrumb from "../../components/common/Breadcrumb";
 
 const NewsPage = ({ news }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <HeadMeta metaTitle={news ? news.Headline : "News Not Found"} />
       <HeaderTwo />
+      <Breadcrumb bCat={news.Category} aPage={news.Headline} />
+
       {news ? (
         <NewsLayout news={news} />
       ) : (

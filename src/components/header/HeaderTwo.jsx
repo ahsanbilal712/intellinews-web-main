@@ -103,11 +103,6 @@ const HeaderTwo = () => {
               <div className="col-md-4">
                 <ul className="header-top-nav list-inline justify-content-center justify-content-md-start">
                   <li>
-                    <Link href="/">
-                      <a>Advertisement</a>
-                    </Link>
-                  </li>
-                  <li>
                     <Link href="/about-us">
                       <a>About Us</a>
                     </Link>
@@ -115,6 +110,11 @@ const HeaderTwo = () => {
                   <li>
                     <Link href="/contact">
                       <a>Contact</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/privacy-policy">
+                      <a>Privacy Policy</a>
                     </Link>
                   </li>
                 </ul>

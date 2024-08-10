@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import SourcesLayout from "./SourcesLayout";
-
+import Breadcrumb from "../../common/Breadcrumb";
 const NewsLayout = ({ news }) => {
   if (!news)
     return (

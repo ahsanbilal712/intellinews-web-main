@@ -3,6 +3,8 @@
 import { MongoClient } from "mongodb";
 import Link from "next/link";
 import HeadMeta from "../../components/elements/HeadMeta";
+import Breadcrumb from "../../components/common/Breadcrumb";
+
 import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
 
@@ -42,6 +44,8 @@ const CategoryPage = ({ news }) => {
     <>
       <HeadMeta metaTitle={`News Category: ${sortedNews[0].Category}`} />
       <HeaderTwo />
+      <Breadcrumb aPage={sortedNews[0].Category} />
+
       <div className="container">
         <h1 className="category-title mt-5">
           Category: {sortedNews[0].Category}
