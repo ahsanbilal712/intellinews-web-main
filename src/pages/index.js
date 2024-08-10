@@ -57,6 +57,10 @@ function HomeTwo() {
       {/* Add AdSense script directly if needed */}
       <head>
         <AdSense pid="ca-pub-5812499395538486" />
+        <meta
+          name="google-site-verification"
+          content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
+        />
         <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
       </head>
 
