@@ -23,6 +23,10 @@ function formatTimeAgo(createdAt) {
   }
 }
 
+const formatHeadlineForUrl = (headline) => {
+  return encodeURIComponent(headline.replace(/\s+/g, "-"));
+};
+
 const CategoriesGrid = ({ selectedCategories, newsData }) => {
   const [filteredNews, setFilteredNews] = useState([]);
 
@@ -67,7 +71,7 @@ const CategoryNews = ({ category, news }) => {
       <hr className="text-lg h-1 w-full bg-slate-600 mb-4" />
       {news.slice(0, 3).map((item) => (
         <div className="flex flex-row p-4 " key={item._id}>
-          <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
+          <Link href={`/news/${formatHeadlineForUrl(item.Headline)}`}>
             <a className="flex-shrink-0">
               <div className="w-32 h-32 -mt-3 overflow-hidden group">
                 <img
@@ -84,7 +88,7 @@ const CategoryNews = ({ category, news }) => {
               className="text-xl hover-line font-bold -mt-4"
               style={{ lineHeight: "1.3" }}
             >
-              <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
+              <Link href={`/news/${formatHeadlineForUrl(item.Headline)}`}>
                 <a>{item.Headline}</a>
               </Link>
             </div>

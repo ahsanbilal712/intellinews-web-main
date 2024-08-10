@@ -1,3 +1,4 @@
+//src/pages/news/[headline].js
 import { MongoClient } from "mongodb";
 import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
@@ -23,7 +24,6 @@ const NewsPage = ({ news }) => {
     </div>
   );
 };
-
 export const getServerSideProps = async (context) => {
   const { headline } = context.params;
 
@@ -39,9 +39,11 @@ export const getServerSideProps = async (context) => {
     });
 
     const db = client.db("intelli-news-db");
+    // Replace hyphens with spaces and decode the URL component
+    const decodedHeadline = decodeURIComponent(headline.replace(/-/g, " "));
     const news = await db
       .collection("data_news")
-      .findOne({ Headline: decodeURIComponent(headline) });
+      .findOne({ Headline: decodedHeadline });
 
     return {
       props: {

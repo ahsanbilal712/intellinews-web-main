@@ -23,6 +23,9 @@ function formatTimeAgo(createdAt) {
     return `Published About ${days} ${days === 1 ? "Day" : "Days"} Ago`;
   }
 }
+const formatHeadlineForUrl = (headline) => {
+  return encodeURIComponent(headline.replace(/\s+/g, "-"));
+};
 
 const HomeNews = ({ news = [], category, setCategory }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +66,7 @@ const HomeNews = ({ news = [], category, setCategory }) => {
               key={newsItem._id}
             >
               <div className="flex flex-col md:flex-row p-4 mt-[30px]">
-                <Link href={`/news/${encodeURIComponent(newsItem.Headline)}`}>
+                <Link href={`/news/${formatHeadlineForUrl(newsItem.Headline)}`}>
                   <a className="align-self-center">
                     <div className="w-[400px] h-[200px]  lg:w-[210px]  lg:h-[170px] overflow-hidden group">
                       <img
@@ -77,7 +80,7 @@ const HomeNews = ({ news = [], category, setCategory }) => {
                 <div className="media-body lg:mt-0 -mt-16 md:px-10 flex -ml-5 justify-between flex-col">
                   <div className="post-cat-group ml-3 m-b-xs-10">
                     <Link
-                      href={`/news/${encodeURIComponent(newsItem.Headline)}`}
+                      href={`/news/${formatHeadlineForUrl(newsItem.Headline)}`}
                     >
                       <a className={`post-cat cat-btn bg-color-blue-one`}>
                         {newsItem.Category}
@@ -89,7 +92,7 @@ const HomeNews = ({ news = [], category, setCategory }) => {
                     style={{ lineHeight: "1.3" }}
                   >
                     <Link
-                      href={`/news/${encodeURIComponent(newsItem.Headline)}`}
+                      href={`/news/${formatHeadlineForUrl(newsItem.Headline)}`}
                     >
                       <a>{newsItem.Headline}</a>
                     </Link>
