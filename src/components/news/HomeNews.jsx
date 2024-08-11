@@ -24,7 +24,7 @@ function formatTimeAgo(createdAt) {
   }
 }
 const formatHeadlineForUrl = (headline) => {
-  return encodeURIComponent(headline.replace(/\s+/g, "-"));
+  return encodeURIComponent(headline);
 };
 
 const HomeNews = ({ news = [], category, setCategory }) => {
