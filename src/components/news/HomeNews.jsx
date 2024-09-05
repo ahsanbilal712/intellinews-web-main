@@ -5,7 +5,7 @@ import { slugify } from "../../utils";
 
 function formatTimeAgo(createdAt) {
   const now = new Date();
-  const diff = Math.abs(now - new Date(createdAt)); // Difference in milliseconds
+  const diff = Math.abs(now - new Date(createdAt)); // Difference in millisecos
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
