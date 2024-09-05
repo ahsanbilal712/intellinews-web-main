@@ -1,134 +1,54 @@
-// src/pages/index.js (or HomeTwo component)
-
 import Link from "next/link";
-import Head from "next/head"; // Import Head from next/head
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterOne from "../components/footer/FooterOne";
 import HeaderTwo from "../components/header/HeaderTwo";
+import Breadcrumb from "../components/common/Breadcrumb";
+
+import HomeNews from "../components/news/HomeNews";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import CategoriesLatestSection from "../components/news/CategoriesLatestSection";
-import TopNewsSection from "../components/news/TopNewsSection";
 import Loading from "../components/loading/Loading";
-import AdSense from "../components/Adsense";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-function HomeTwo() {
-  const initialCategories = ["Pakistan", "World", "Sports"];
-
-  const [selectedCategories, setSelectedCategories] =
-    useState(initialCategories);
-  const [category, setCategory] = useState(""); // Track the current category for TopNewsSection
-
-  const categories = [
-    "Pakistan",
-    "World",
-    "Sports",
-    "Business",
-    "Entertainment",
-    "Weather",
-    "Health",
-    "Science",
-    "Technology",
-  ];
-
-  const { data, error } = useSWR(`/api/news`, fetcher);
+function LatestNews() {
+  const router = useRouter();
+  const [category, setCategory] = useState("");
+  const { data, error } = useSWR(`/api/news?category=${category}`, fetcher);
 
   if (error) return <div>Failed to load data.</div>;
   if (!data) return <Loading />;
 
-  // Handle category selection/deselection
+  // Log data to check its structure
+  console.log("Data fetched from API:", data);
+
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
-    if (selectedCategories.includes(selectedCategory)) {
-      // Remove category if already selected
-      setSelectedCategories(
-        selectedCategories.filter((category) => category !== selectedCategory)
-      );
-    } else {
-      // Add category if not selected
-      setSelectedCategories([...selectedCategories, selectedCategory]);
+    setCategory(selectedCategory);
+    if (selectedCategory) {
+      router.push(`/categories/${selectedCategory}`);
     }
   };
 
   return (
-    <html lang="en">
-      {/* Add AdSense script directly if needed */}
-      <head>
-        <AdSense pid="ca-pub-5812499395538486" />
-        <meta
-          name="google-site-verification"
-          content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
-        />
-        <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
-      </head>
+    <>
+      <HeadMeta metaTitle="LatestNews" />
 
-      <HeadMeta metaTitle="Home" />
-      <body>
-        <HeaderTwo />
+      <HeaderTwo />
+      <Breadcrumb aPage="Latest" />
 
-        <TopNewsSection
-          news={data}
-          category={category}
-          setCategory={setCategory}
-        />
-
-        <div className="container mt-5">
-          <div className="my-5 text-5xl font-bold">Your Topics</div>
-
-          <div className="mb-3">
-            <h5>Select Categories</h5>
-            <div className="flex flex-wrap gap-4">
-              {categories.map((category, index) => (
-                <div key={index} className="form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id={`category-${index}`}
-                    value={category}
-                    checked={selectedCategories.includes(category)}
-                    onChange={handleCategoryChange}
-                  />
-                  <label
-                    className="form-check-label ml-2"
-                    htmlFor={`category-${index}`}
-                  >
-                    {category}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* AdSense Ad Unit */}
-          <div className="adsense-container my-5">
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-5812499395538486"
-              data-ad-slot="your-ad-slot" // Replace with actual ad slot ID
-              data-ad-format="auto"
-            ></ins>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              `,
-              }}
-            />
-          </div>
-
-          <CategoriesLatestSection
-            selectedCategories={selectedCategories}
-            newsData={data}
-          />
-        </div>
-
-        <FooterOne />
-      </body>
-    </html>
+      <div className="flex justify-center text-5xl py-10 font-bold">
+        Latest News
+      </div>
+      <HomeNews
+        news={Array.isArray(data) ? data : []}
+        category={category}
+        setCategory={setCategory}
+      />
+      <FooterOne />
+    </>
   );
 }
 
-export default HomeTwo;
+export default LatestNews;
