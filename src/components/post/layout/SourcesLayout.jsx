@@ -1,4 +1,3 @@
-// src/components/post/SourcesLayout.jsx
 import React from "react";
 
 // Define a mapping between source names and image paths
@@ -12,10 +11,8 @@ const imageSources = {
   "The Tribune": "/images/news-sources/express_tribune.jpeg",
   Tribune: "/images/news-sources/express_tribune.jpeg",
   "The Nation": "/images/news-sources/TheNation.png",
-
   "Geo TV": "/images/news-sources/geo.png",
   "Geo News": "/images/news-sources/geo.png",
-
   "geo.tv": "/images/news-sources/geo.png",
   "tribune.com.pk": "/images/news-sources/express_tribune.jpeg",
 };
@@ -36,6 +33,18 @@ const SourcesLayout = ({ news }) => {
           const imgSrc =
             imageSources[source.SourceName] ||
             "/images/news-sources/default.png"; // Fallback image if source name not found
+
+          // Determine keyfacts field name and format it
+          const keyfacts = source.keyfacts || "No key facts available.";
+          const formattedKeyfacts =
+            typeof keyfacts === "string"
+              ? keyfacts.split("|").map((fact) => fact.trim())
+              : [];
+
+          // Log for debugging
+          console.log("Source:", source);
+          console.log("Key Facts:", keyfacts);
+          console.log("Formatted Key Facts:", formattedKeyfacts);
 
           return (
             <div
@@ -65,6 +74,19 @@ const SourcesLayout = ({ news }) => {
                     {source.SourceName}
                   </span>
                 </a>
+              </div>
+              {/* Display key facts */}
+              <div className="p-4 bg-gray-100 text-gray-700">
+                <h3 className="text-lg font-semibold mb-2">Key Facts</h3>
+                <ul className="list-disc pl-5 text-sm leading-relaxed">
+                  {formattedKeyfacts.length > 0 ? (
+                    formattedKeyfacts.map((fact, factIndex) => (
+                      <li key={factIndex}>{fact}</li>
+                    ))
+                  ) : (
+                    <li>No key facts available.</li>
+                  )}
+                </ul>
               </div>
             </div>
           );

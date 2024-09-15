@@ -1,7 +1,8 @@
+// models/NewsSummary.js
 import mongoose from "mongoose";
 import { slugify } from "../src/utils";
 
-// Define the schema with only the created_at timestamp
+// Define the schema with the necessary fields including a flexible keyfacts object
 const newsSummarySchema = new mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
@@ -12,6 +13,7 @@ const newsSummarySchema = new mongoose.Schema(
       {
         SourceName: String,
         SourceUrl: String,
+        keyfacts: String,
       },
     ],
     Image_source_name: String,
