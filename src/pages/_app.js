@@ -2,54 +2,55 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/style.css";
 import Script from "next/script";
-import AdSense from "../components/Adsense";
+import Head from "next/head"; // Import Head for SEO-related meta tags
+import AdSense from "../components/Adsense"; // Import your AdSense component
 
 // Define the custom App component
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <html lang="en">
-        {/* Google Analytics Script */}
-        <head>
-          <AdSense pid="ca-pub-5812499395538486" />
-          <meta
-            name="google-adsense-account"
-            content="ca-pub-5812499395538486"
-          />
-          <meta
-            name="google-site-verification"
-            content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
-          />
-        </head>
-        <Script
+      {/* Use the Head component to manage the head section */}
+      <Head>
+        <title>AI News</title>
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="description"
+          content="AI News - The latest updates in AI technology"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
           name="google-site-verification"
           content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
         />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-ZBLBZF7D7R"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+      </Head>
+
+      {/* Google Analytics Script */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-ZBLBZF7D7R"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-ZBLBZF7D7R');
         `}
-        </Script>
+      </Script>
 
-        {/* Google AdSense Script */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5812499395538486"
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
+      {/* Google AdSense Script */}
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5812499395538486"
+        strategy="afterInteractive"
+        crossOrigin="anonymous"
+      />
 
-        {/* Render the current page's component */}
-        <Component {...pageProps} />
-      </html>
+      {/* Render Google AdSense Component */}
+      <AdSense pid="ca-pub-5812499395538486" />
+
+      {/* Render the current page's component */}
+      <Component {...pageProps} />
     </>
   );
 }
