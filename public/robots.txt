@@ -4,4 +4,4 @@ Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 
-Sitemap: https://intellinewsai.netlify.app/latest
+Sitemap: https://intellinewsai.netlify.app/sitemap.xml
