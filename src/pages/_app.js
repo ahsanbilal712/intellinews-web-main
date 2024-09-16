@@ -11,11 +11,11 @@ function MyApp({ Component, pageProps }) {
     <>
       {/* Use the Head component to manage the head section */}
       <Head>
-        <title>AI News</title>
+        <title>A News</title>
         <meta name="robots" content="index, follow" />
         <meta
           name="description"
-          content="AI News - The latest updates in AI technology"
+          content="A News - The latest updates in AI technology"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
