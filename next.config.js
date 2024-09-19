@@ -19,6 +19,15 @@ const nextConfig = {
       "www.nation.com.pk",
     ],
   },
+  // Add the rewrites function
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
