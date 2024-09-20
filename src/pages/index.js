@@ -1,12 +1,11 @@
-// src/pages/index.js (or HomeTwo component)
-
 import Link from "next/link";
-import Head from "next/head"; // Import Head from next/head
+import Head from "next/head";
+import { useState, useCallback } from "react";
+import { useRouter } from "next/router";
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterOne from "../components/footer/FooterOne";
 import HeaderTwo from "../components/header/HeaderTwo";
 import useSWR from "swr";
-import { useState } from "react";
 import CategoriesLatestSection from "../components/news/CategoriesLatestSection";
 import TopNewsSection from "../components/news/TopNewsSection";
 import Loading from "../components/loading/Loading";
@@ -16,10 +15,10 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function HomeTwo() {
   const initialCategories = ["Pakistan", "World", "Sports"];
-
-  const [selectedCategories, setSelectedCategories] =
-    useState(initialCategories);
-  const [category, setCategory] = useState(""); // Track the current category for TopNewsSection
+  const [selectedCategories, setSelectedCategories] = useState(initialCategories);
+  const [category, setCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const categories = [
     "Pakistan",
@@ -35,38 +34,49 @@ function HomeTwo() {
 
   const { data, error } = useSWR(`/api/news`, fetcher);
 
-  if (error) return <div>Failed to load data.</div>;
-  if (!data) return <Loading />;
-
-  // Handle category selection/deselection
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     if (selectedCategories.includes(selectedCategory)) {
-      // Remove category if already selected
-      setSelectedCategories(
-        selectedCategories.filter((category) => category !== selectedCategory)
-      );
+      setSelectedCategories(selectedCategories.filter((category) => category !== selectedCategory));
     } else {
-      // Add category if not selected
       setSelectedCategories([...selectedCategories, selectedCategory]);
     }
   };
 
+  const handleLinkClick = useCallback((e) => {
+    const href = e.currentTarget.href;
+    if (href.startsWith(window.location.origin) || href.startsWith('/')) {
+      e.preventDefault();
+      setIsLoading(true);
+      router.push(href).then(() => setIsLoading(false));
+    }
+  }, [router]);
+
+  if (error) return <div>Failed to load data.</div>;
+  if (!data) return <Loading />;
+
   return (
     <html lang="en">
-      {/* Add AdSense script directly if needed */}
-      <head>
+      <Head>
         <AdSense pid="ca-pub-5812499395538486" />
         <meta
           name="google-site-verification"
           content="m2xs2KSR3ynGf6-R3l1pBfQ8lntpPJuQKGH-l5kgcyw"
         />
         <meta name="google-adsense-account" content="ca-pub-5812499395538486" />
-      </head>
+      </Head>
 
       <HeadMeta metaTitle="Home" />
       <body>
         <HeaderTwo />
+
+        {isLoading && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+            <div className="spinner-border text-light" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
 
         <TopNewsSection
           news={data}
@@ -101,13 +111,12 @@ function HomeTwo() {
             </div>
           </div>
 
-          {/* AdSense Ad Unit */}
           <div className="adsense-container my-5">
             <ins
               className="adsbygoogle"
               style={{ display: "block" }}
               data-ad-client="ca-pub-5812499395538486"
-              data-ad-slot="your-ad-slot" // Replace with actual ad slot ID
+              data-ad-slot="your-ad-slot"
               data-ad-format="auto"
             ></ins>
             <script
