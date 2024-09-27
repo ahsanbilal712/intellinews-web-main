@@ -4,6 +4,8 @@ import { FaInfoCircle, FaTimes, FaExternalLinkAlt } from "react-icons/fa";
 
 const imageSources = {
   "ARY News": "/images/news-sources/ARY.png",
+  "Ary News": "/images/news-sources/ARY.png",
+
   "arynews.tv": "/images/news-sources/ARY.png",
   Dawn: "/images/news-sources/dawn.png",
   "Dawn.com": "/images/news-sources/dawn.png",
