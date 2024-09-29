@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiSearch, FiPlus } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Utility function to format the time ago
 function formatTimeAgo(createdAt) {
@@ -130,6 +131,7 @@ const NewsTopicsSection = ({ newsData }) => {
 
 const TopicNews = ({ topic, news }) => {
   const router = useRouter();
+  const [visibleNews, setVisibleNews] = useState(3);
 
   const handleNewsClick = (e, headline) => {
     e.preventDefault();
@@ -139,15 +141,26 @@ const TopicNews = ({ topic, news }) => {
     });
   };
 
+  const loadMore = () => {
+    setVisibleNews(prevVisible => Math.min(prevVisible + 5, news.length));
+  };
+
   return (
     <div className="p-4 bg-gray-100 rounded-xl shadow-md">
       <h2 className="text-3xl flex justify-center font-bold mb-4">
         {topic}
       </h2>
       <hr className="text-lg h-1 w-full bg-slate-600 mb-4" />
-      {news.length > 0 ? (
-        news.slice(0, 3).map((item) => (
-          <div className="flex flex-row p-4" key={item._id}>
+      <AnimatePresence>
+        {news.slice(0, visibleNews).map((item, index) => (
+          <motion.div
+            key={item._id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            className="flex flex-row p-4"
+          >
             <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
               <a 
                 className="flex-shrink-0 cursor-pointer"
@@ -177,10 +190,19 @@ const TopicNews = ({ topic, news }) => {
               </Link>
               <div className="text-lg mt-1">{formatTimeAgo(item.created_at)}</div>
             </div>
-          </div>
-        ))
-      ) : (
-        <div>No news found for this topic.</div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+      {visibleNews < news.length && (
+        <motion.button
+          onClick={loadMore}
+          className="w-full mt-4 py-2 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FiPlus className="inline-block mr-2" />
+          Load More
+        </motion.button>
       )}
     </div>
   );
