@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 // Utility function to format the time ago
@@ -24,16 +25,66 @@ function formatTimeAgo(createdAt) {
 }
 
 const TopNewsSection = ({ news }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const router = useRouter();
+
   // Sort news items by the latest created_at date
   const sortedNews = [...news].sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
+
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      const filteredSuggestions = sortedNews
+        .filter((item) =>
+          item.Headline && typeof item.Headline === 'string'
+            ? item.Headline.toLowerCase().includes(searchTerm.toLowerCase())
+            : false
+        )
+        .slice(0, 5); // Limit to 5 suggestions
+      setSuggestions(filteredSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+  }, [searchTerm, sortedNews]);
+
+  const handleSuggestionClick = (headline) => {
+    const url = `/news/${encodeURIComponent(headline || '')}`;
+    router.push(url).then(() => {
+      window.location.href = url; // Force a full page reload
+    });
+  };
 
   return (
     <div className="recent-news-wrapper section-gap pt-4 lg:pt-16 bg-[#191919]">
       <div className="container mx-auto w-full lg:w-[1280px]">
         <div className="mt-5 mb-2 text-2xl lg:text-5xl text-white font-bold">
           Top News
+        </div>
+
+        {/* Add search input */}
+        <div className="mb-4 relative">
+          <input
+            type="text"
+            placeholder="Search headlines..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full p-2 rounded-lg bg-gray-700 text-white"
+          />
+          {suggestions.length > 0 && (
+            <div className="absolute z-10 w-full mt-1 bg-gray-800 rounded-lg shadow-lg">
+              {suggestions.map((item) => (
+                <div
+                  key={item._id}
+                  onClick={() => handleSuggestionClick(item.Headline)}
+                  className="block p-2 hover:bg-gray-700 text-white cursor-pointer"
+                >
+                  {item.Headline || 'No headline available'}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-wrap">
