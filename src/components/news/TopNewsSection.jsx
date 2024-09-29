@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { FiSearch } from "react-icons/fi";
 
 // Utility function to format the time ago
 function formatTimeAgo(createdAt) {
@@ -26,34 +27,30 @@ function formatTimeAgo(createdAt) {
 
 const TopNewsSection = ({ news }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const router = useRouter();
 
   // Sort news items by the latest created_at date
-  const sortedNews = [...news].sort(
-    (a, b) => new Date(b.created_at) - new Date(a.created_at)
-  );
+  const sortedNews = useMemo(() => {
+    return [...news].sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+  }, [news]);
 
-  useEffect(() => {
+  const suggestedNews = useMemo(() => {
     if (searchTerm.length > 0) {
-      const filteredSuggestions = sortedNews
-        .filter((item) =>
-          item.Headline && typeof item.Headline === 'string'
-            ? item.Headline.toLowerCase().includes(searchTerm.toLowerCase())
-            : false
-        )
-        .slice(0, 5); // Limit to 5 suggestions
-      setSuggestions(filteredSuggestions);
-    } else {
-      setSuggestions([]);
+      return sortedNews.filter((item) =>
+        item.Headline && typeof item.Headline === 'string'
+          ? item.Headline.toLowerCase().includes(searchTerm.toLowerCase())
+          : false
+      ).slice(0, 5); // Limit to 5 suggestions
     }
+    return [];
   }, [searchTerm, sortedNews]);
 
-  const handleSuggestionClick = (headline) => {
+  const handleNewsClick = (headline) => {
     const url = `/news/${encodeURIComponent(headline || '')}`;
-    router.push(url).then(() => {
-      window.location.href = url; // Force a full page reload
-    });
+    router.push(url);
   };
 
   return (
@@ -63,30 +60,42 @@ const TopNewsSection = ({ news }) => {
           Top News
         </div>
 
-        {/* Add search input */}
+        {/* Search input */}
         <div className="mb-4 relative">
-          <input
-            type="text"
-            placeholder="Search headlines..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          />
-          {suggestions.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 bg-gray-800 rounded-lg shadow-lg">
-              {suggestions.map((item) => (
-                <div
-                  key={item._id}
-                  onClick={() => handleSuggestionClick(item.Headline)}
-                  className="block p-2 hover:bg-gray-700 text-white cursor-pointer"
+          <div className="flex justify-center">
+            <div className={`relative w-full max-w-md ${isInputFocused ? 'ring-2 ring-blue-400' : ''}`}>
+              <div className="flex items-center bg-white rounded-full shadow-md transition-all duration-300">
+                <FiSearch className="text-gray-400 ml-4 mr-2" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search topics..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setTimeout(() => setIsInputFocused(false), 200)}
+                  className="w-full py-3 px-2 rounded-full focus:outline-none bg-transparent"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Suggestions */}
+          {isInputFocused && suggestedNews.length > 0 && (
+            <div className="absolute z-10 bg-white rounded-lg shadow-lg mt-2 w-full max-w-md left-1/2 transform -translate-x-1/2">
+              {suggestedNews.map((item) => (
+                <div 
+                  key={item._id} 
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleNewsClick(item.Headline)}
                 >
-                  {item.Headline || 'No headline available'}
+                  {item.Headline}
                 </div>
               ))}
             </div>
           )}
         </div>
 
+        {/* Display news items */}
         <div className="flex flex-wrap">
           <div className="w-full lg:w-1/2 mb-8 mt-3 lg:mb-0">
             {sortedNews.slice(0, 1).map((newsItem) => (

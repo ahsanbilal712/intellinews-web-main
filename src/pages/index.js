@@ -7,6 +7,7 @@ import FooterOne from "../components/footer/FooterOne";
 import HeaderTwo from "../components/header/HeaderTwo";
 import useSWR from "swr";
 import CategoriesLatestSection from "../components/news/CategoriesLatestSection";
+import NewsTopicsSection from "../components/news/NewsTopicsSection";
 import TopNewsSection from "../components/news/TopNewsSection";
 import Loading from "../components/loading/Loading";
 import AdSense from "../components/Adsense";
@@ -141,6 +142,10 @@ function HomeTwo() {
           </div>
 
           <CategoriesLatestSection
+            selectedCategories={selectedCategories}
+            newsData={data}
+          />
+          <NewsTopicsSection
             selectedCategories={selectedCategories}
             newsData={data}
           />
