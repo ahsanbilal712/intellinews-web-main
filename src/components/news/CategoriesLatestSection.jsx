@@ -110,8 +110,9 @@ const CategoryNews = ({ category, news }) => {
                 style={{ lineHeight: "1.3" }}
                 onClick={(e) => handleNewsClick(e, item.Headline)}
               >
-                <span className="hover-line-effect">{item.Headline}</span>
-              </a>
+ <span className="text-black bg-gradient-to-r mt-1 from-black to-black bg-no-repeat [background-position:0_88%] [background-size:0%_2px] group-hover:[background-size:100%_2px] transition-all py-1 duration-300">
+                    {item.Headline}
+                  </span>              </a>
             </Link>
             <div className="text-lg mt-1">{formatTimeAgo(item.created_at)}</div>
           </div>
