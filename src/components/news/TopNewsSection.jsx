@@ -56,16 +56,12 @@ const TopNewsSection = ({ news }) => {
   return (
     <div className="recent-news-wrapper section-gap pt-4 lg:pt-16 bg-[#191919]">
       <div className="container mx-auto w-full lg:w-[1280px]">
-        <div className="mt-5 mb-2 text-2xl lg:text-5xl text-white font-bold">
-          Top News
-        </div>
-
-        {/* Search input */}
-        <div className="mb-4 relative">
+         {/* Search input */}
+         <div className="mb-8 relative">
           <div className="flex justify-center">
-            <div className={`relative w-full max-w-md ${isInputFocused ? 'ring-2 ring-blue-400' : ''}`}>
-              <div className="flex items-center bg-white rounded-full shadow-md transition-all duration-300">
-                <FiSearch className="text-gray-400 ml-4 mr-2" size={20} />
+            <div className="relative w-full max-w-2xl">
+              <div className={`flex items-center bg-white bg-opacity-10 backdrop-blur-md rounded-full shadow-lg transition-all duration-300 ${isInputFocused ? 'ring-2 ring-blue-400' : ''}`}>
+                <FiSearch className="text-gray-300 ml-6 mr-3" size={24} />
                 <input
                   type="text"
                   placeholder="Search topics..."
@@ -73,7 +69,7 @@ const TopNewsSection = ({ news }) => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onFocus={() => setIsInputFocused(true)}
                   onBlur={() => setTimeout(() => setIsInputFocused(false), 200)}
-                  className="w-full py-3 px-2 rounded-full focus:outline-none bg-transparent"
+                  className="w-full py-4 px-3 rounded-full focus:outline-none bg-transparent  text-white placeholder-gray-300"
                 />
               </div>
             </div>
@@ -81,19 +77,27 @@ const TopNewsSection = ({ news }) => {
           
           {/* Suggestions */}
           {isInputFocused && suggestedNews.length > 0 && (
-            <div className="absolute z-10 bg-white rounded-lg shadow-lg mt-2 w-full max-w-md left-1/2 transform -translate-x-1/2">
-              {suggestedNews.map((item) => (
+            <div className="absolute z-10 bg-white bg-opacity-10 backdrop-blur-2xl rounded-2xl shadow-xl mt-2 w-full max-w-2xl left-1/2 transform -translate-x-1/2 overflow-hidden transition-all duration-300 ease-in-out">
+              {suggestedNews.map((item, index) => (
                 <div 
                   key={item._id} 
-                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                  className={`p-4 hover:bg-white hover:bg-opacity-20 cursor-pointer transition-all duration-200 ${index !== suggestedNews.length - 1 ? 'border-b border-gray-200 border-opacity-20' : ''}`}
                   onClick={() => handleNewsClick(item.Headline)}
                 >
-                  {item.Headline}
+                  <p className="text-white text-2xl font-semibold mb-1">{item.Headline}</p>
+                  <p className="text-gray-300 py text-sm">{item.Category} • {formatTimeAgo(item.created_at)}</p>
                 </div>
               ))}
             </div>
           )}
         </div>
+
+        
+        <div className="mt-5 mb-2 text-2xl lg:text-5xl text-white font-bold">
+          Top News
+        </div>
+
+       
 
         {/* Display news items */}
         <div className="flex flex-wrap">

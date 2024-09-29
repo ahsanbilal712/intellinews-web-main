@@ -4213,7 +4213,6 @@ select {
   color: var(--grey-dark-one);
   padding: 0.9rem 2rem;
   border-radius: 0;
-  border: 0.2rem solid var(--grey-light-one);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

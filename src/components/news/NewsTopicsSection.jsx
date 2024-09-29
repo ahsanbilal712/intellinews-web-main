@@ -63,9 +63,9 @@ const NewsTopicsSection = ({ newsData }) => {
     <div className="container mx-auto py-8">
       {/* Improved Search Bar */}
       <div className="mb-6 flex justify-center">
-        <div className={`relative w-full max-w-md ${isInputFocused ? 'ring-2 ring-blue-400' : ''}`}>
-          <div className="flex items-center bg-white rounded-full shadow-md transition-all duration-300">
-            <FiSearch className="text-gray-400 ml-4 mr-2" size={20} />
+        <div className={`relative w-full max-w-2xl transition-all duration-300 ease-in-out ${isInputFocused ? 'max-w-3xl' : ''}`}>
+          <div className={`flex items-center bg-gray-100 rounded-full shadow-md transition-all duration-300 ease-in-out ${isInputFocused ? 'shadow-lg bg-white' : ''}`}>
+            <FiSearch className={`text-gray-400 ml-4 mr-2 transition-all duration-300 ${isInputFocused ? 'text-blue-500' : ''}`} size={20} />
             <input
               type="text"
               placeholder="Search topics..."
@@ -74,11 +74,13 @@ const NewsTopicsSection = ({ newsData }) => {
               onKeyPress={handleKeyPress}
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
-              className="w-full py-3 px-2 rounded-full focus:outline-none bg-transparent"
+              className="w-full py-3 px-2 rounded-full focus:outline-none bg-transparent transition-all duration-300"
             />
             <button
               onClick={() => handleAddTopic(searchTerm.trim())}
-              className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
+              className={`mr-2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-all duration-300 flex items-center justify-center ${
+                searchTerm.trim() ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
+              }`}
             >
               <FiPlus size={20} />
             </button>
