@@ -1,17 +1,23 @@
-//src/pages/news/[headline].js
 import { MongoClient } from "mongodb";
 import HeadMeta from "../../components/elements/HeadMeta";
 import FooterOne from "../../components/footer/FooterOne";
 import HeaderTwo from "../../components/header/HeaderTwo";
 import NewsLayout from "../../components/post/layout/NewsLayout";
 import Breadcrumb from "../../components/common/Breadcrumb";
+import { useRouter } from 'next/router';
 
 const NewsPage = ({ news }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <HeadMeta metaTitle={news ? news.Headline : "News Not Found"} />
       <HeaderTwo />
-      <Breadcrumb bCat={news.Category} aPage={news.Headline} />
+      {news && <Breadcrumb bCat={news.Category} aPage={news.Headline} />}
 
       {news ? (
         <NewsLayout news={news} />
@@ -24,6 +30,18 @@ const NewsPage = ({ news }) => {
     </div>
   );
 };
+
+let cachedClient = null;
+
+async function connectToDatabase() {
+  if (cachedClient) {
+    return cachedClient;
+  }
+  const client = await MongoClient.connect(process.env.MONGODB_URI);
+  cachedClient = client;
+  return client;
+}
+
 export const getServerSideProps = async (context) => {
   const { headline } = context.params;
 
@@ -31,32 +49,26 @@ export const getServerSideProps = async (context) => {
     return { props: { news: null } };
   }
 
-  let client;
   try {
-    client = await MongoClient.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
+    const client = await connectToDatabase();
     const db = client.db("intelli-news-db");
-    // Replace hyphens with spaces and decode the URL component
-    const decodedHeadline = decodeURIComponent(headline);
+    const decodedHeadline = decodeURIComponent(headline.replace(/-/g, ' '));
     const news = await db
       .collection("data_news")
       .findOne({ Headline: decodedHeadline });
 
+    if (!news) {
+      return { notFound: true };
+    }
+
     return {
       props: {
-        news: news ? JSON.parse(JSON.stringify(news)) : null,
+        news: JSON.parse(JSON.stringify(news)),
       },
     };
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    console.error("Error fetching news:", error);
     return { props: { news: null } };
-  } finally {
-    if (client) {
-      client.close();
-    }
   }
 };
 

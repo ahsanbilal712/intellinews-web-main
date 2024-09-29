@@ -1,7 +1,6 @@
-// src/components/news/CategoriesGrid.js
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 // Utility function to format the time ago
 function formatTimeAgo(createdAt) {
@@ -23,18 +22,26 @@ function formatTimeAgo(createdAt) {
   }
 }
 
-const formatHeadlineForUrl = (headline) => {
-  return encodeURIComponent(headline.replace(/\s+/g, "-"));
-};
-
 const CategoriesGrid = ({ selectedCategories, newsData }) => {
   const [filteredNews, setFilteredNews] = useState([]);
 
   useEffect(() => {
+    // Load selected categories from local storage on component mount
+    const savedCategories = JSON.parse(localStorage.getItem('selectedNewsCategories')) || [];
+    if (savedCategories.length > 0 && selectedCategories.length === 0) {
+      // Only use saved categories if no categories are currently selected
+      selectedCategories = savedCategories;
+    }
+
     const filtered = newsData.filter((item) =>
       selectedCategories.includes(item.Category)
     );
-    setFilteredNews(filtered);
+    // Sort the filtered news by created_at date, latest first
+    const sortedFiltered = filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    setFilteredNews(sortedFiltered);
+
+    // Save selected categories to local storage
+    localStorage.setItem('selectedNewsCategories', JSON.stringify(selectedCategories));
   }, [selectedCategories, newsData]);
 
   return (
@@ -59,20 +66,33 @@ const CategoriesGrid = ({ selectedCategories, newsData }) => {
 };
 
 const CategoryNews = ({ category, news }) => {
+  const router = useRouter();
+
+  const handleNewsClick = (e, headline) => {
+    e.preventDefault();
+    const url = `/news/${encodeURIComponent(headline)}`;
+    router.push(url).then(() => {
+      window.location.href = url; // Force a full page reload
+    });
+  };
+
   return (
     <div className="p-4 bg-gray-100 rounded-xl shadow-md">
-      <h2 className="text-5xl flex justify-center font-bold hover-line mb-4">
+      <h2 className="text-5xl flex justify-center font-bold mb-4">
         <Link href={`/categories/${category}`}>
-          <a className="mx-auto">
-            {category} {">"}{" "}
+          <a className="mx-auto hover:text-blue-600 transition-colors duration-300">
+            {category} {">"}
           </a>
         </Link>
       </h2>
       <hr className="text-lg h-1 w-full bg-slate-600 mb-4" />
       {news.slice(0, 3).map((item) => (
-        <div className="flex flex-row p-4 " key={item._id}>
-          <Link href={`/news/${formatHeadlineForUrl(item.Headline)}`}>
-            <a className="flex-shrink-0">
+        <div className="flex flex-row p-4" key={item._id}>
+          <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
+            <a 
+              className="flex-shrink-0 cursor-pointer"
+              onClick={(e) => handleNewsClick(e, item.Headline)}
+            >
               <div className="w-32 h-32 -mt-3 overflow-hidden group">
                 <img
                   src={item.image_url}
@@ -84,14 +104,15 @@ const CategoryNews = ({ category, news }) => {
           </Link>
 
           <div className="media-body px-4 flex flex-col justify-between">
-            <div
-              className="text-xl hover-line font-bold -mt-4"
-              style={{ lineHeight: "1.3" }}
-            >
-              <Link href={`/news/${formatHeadlineForUrl(item.Headline)}`}>
-                <a>{item.Headline}</a>
-              </Link>
-            </div>
+            <Link href={`/news/${encodeURIComponent(item.Headline)}`}>
+              <a 
+                className="text-xl font-bold -mt-4 cursor-pointer group"
+                style={{ lineHeight: "1.3" }}
+                onClick={(e) => handleNewsClick(e, item.Headline)}
+              >
+                <span className="hover-line-effect">{item.Headline}</span>
+              </a>
+            </Link>
             <div className="text-lg mt-1">{formatTimeAgo(item.created_at)}</div>
           </div>
         </div>

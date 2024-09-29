@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterOne from "../components/footer/FooterOne";
@@ -34,13 +34,25 @@ function HomeTwo() {
 
   const { data, error } = useSWR(`/api/news`, fetcher);
 
+  // Load selected categories from localStorage on initial render
+  useEffect(() => {
+    const savedCategories = localStorage.getItem('selectedCategories');
+    if (savedCategories) {
+      setSelectedCategories(JSON.parse(savedCategories));
+    }
+  }, []);
+
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
+    let newSelectedCategories;
     if (selectedCategories.includes(selectedCategory)) {
-      setSelectedCategories(selectedCategories.filter((category) => category !== selectedCategory));
+      newSelectedCategories = selectedCategories.filter((category) => category !== selectedCategory);
     } else {
-      setSelectedCategories([...selectedCategories, selectedCategory]);
+      newSelectedCategories = [...selectedCategories, selectedCategory];
     }
+    setSelectedCategories(newSelectedCategories);
+    // Save to localStorage
+    localStorage.setItem('selectedCategories', JSON.stringify(newSelectedCategories));
   };
 
   const handleLinkClick = useCallback((e) => {
